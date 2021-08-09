@@ -18,13 +18,16 @@ frappe.ui.form.on("Payment Entry", {
         if (cur_frm.doc.docstatus == "1" && cur_frm.doc.mode_of_payment == "شيك" && cur_frm.doc.payment_type == "Receive" && cur_frm.doc.encashed_amount > 0 && cur_frm.doc.paid_amount > cur_frm.doc.encashed_amount && cur_frm.doc.cheque_status == "حافظة شيكات مرجعة"){
                 set_field_options("cheque_action", ["رد شيك","تسييل الشيك"]);
         }
+        if (cur_frm.doc.docstatus == "1" && cur_frm.doc.mode_of_payment == "شيك" && cur_frm.doc.payment_type == "Receive" && cur_frm.doc.paid_amount > cur_frm.doc.encashed_amount){
+                set_field_options("cheque_action", ["تسييل الشيك"]);
+        }
         if (cur_frm.doc.docstatus == "1" && cur_frm.doc.mode_of_payment == "شيك" && cur_frm.doc.payment_type == "Receive" && cur_frm.doc.paid_amount == cur_frm.doc.encashed_amount && cur_frm.doc.cheque_status == "حافظة شيكات مرجعة"){
                 set_field_options("cheque_action", ["رد شيك"]);
         }
         if (cur_frm.doc.docstatus == "1" && cur_frm.doc.mode_of_payment == "شيك" && cur_frm.doc.payment_type == "Pay" && cur_frm.doc.party_type == "Supplier" && cur_frm.doc.cheque_status_pay == "حافظة شيكات برسم الدفع"){
             set_field_options("cheque_action", ["صرف الشيك"]);
         }
-        if (cur_frm.doc.docstatus == "1" && cur_frm.doc.mode_of_payment == "شيك" && (cur_frm.doc.cheque_status == "مظهر" || cur_frm.doc.cheque_status == "محصل فوري" || cur_frm.doc.cheque_status == "مردود" || cur_frm.doc.cheque_status == "محصل" || cur_frm.doc.cheque_status_pay == "مدفوع")){
+        if (cur_frm.doc.docstatus == "1" && cur_frm.doc.mode_of_payment == "شيك" && (cur_frm.doc.cheque_status == "مظهر" || cur_frm.doc.cheque_status == "محصل فوري" || cur_frm.doc.cheque_status == "مردود" || cur_frm.doc.cheque_status == "محصل" || cur_frm.doc.cheque_status_pay == "مدفوع") && cur_frm.doc.paid_amount == cur_frm.doc.encashed_amount){
             set_field_options("cheque_action", [" "]);
         }
     }
@@ -42,23 +45,37 @@ frappe.ui.form.on("Payment Entry", {
 	}
 });
 
-//frappe.ui.form.on("Payment Entry","bank_acc", function(frm){
-//    if(cur_frm.doc.payment_type == "Pay" && cur_frm.doc.mode_of_payment == "شيك"){
-//        cur_frm.set_value("paid_from",cur_frm.doc.collection_fee_account);
-//    }
-//});
+frappe.ui.form.on("Payment Entry","bank_acc", function(frm){
+    if(cur_frm.doc.payment_type == "Pay" && cur_frm.doc.mode_of_payment == "شيك"){
+        cur_frm.set_value("paid_from",cur_frm.doc.collection_fee_account);
+    }
+});
 
-//frappe.ui.form.on("Payment Entry","payment_type", function(frm){
-//    if(cur_frm.doc.payment_type == "Receive" && cur_frm.doc.mode_of_payment == "شيك"){
-//        cur_frm.set_value("paid_to",cur_frm.doc.default_incoming_cheque_wallet_account);
-//    }
-//});
+frappe.ui.form.on('Payment Entry', 'payment_type',  function(frm) {
+   if(cur_frm.doc.payment_type == "Receive" && cur_frm.doc.mode_of_payment == "شيك"){
+       frappe.call({ method: "frappe.client.get_value",
+args: { doctype: "Company",
+fieldname: "default_incoming_cheque_wallet_account",
+filters: { 'name': cur_frm.doc.company},
+}, callback: function(r)
+{cur_frm.set_value("paid_to", r.message.default_incoming_cheque_wallet_account);
+  } });
+   }
 
-//frappe.ui.form.on("Payment Entry","mode_of_payment", function(frm){
-//    if(cur_frm.doc.payment_type == "Receive" && cur_frm.doc.mode_of_payment == "شيك"){
-//        cur_frm.set_value("paid_to",cur_frm.doc.default_incoming_cheque_wallet_account);
-//    }
-//});
+});
+
+frappe.ui.form.on('Payment Entry', 'mode_of_payment',  function(frm) {
+   if(cur_frm.doc.payment_type == "Receive" && cur_frm.doc.mode_of_payment == "شيك"){
+       frappe.call({ method: "frappe.client.get_value",
+args: { doctype: "Company",
+fieldname: "default_incoming_cheque_wallet_account",
+filters: { 'name': cur_frm.doc.company},
+}, callback: function(r)
+{cur_frm.set_value("paid_to", r.message.default_incoming_cheque_wallet_account);
+  } });
+   }
+
+});
 
 frappe.ui.form.on("Payment Entry", "encashment_amount", function(frm) {
     cur_frm.doc.encashed_amount = cur_frm.doc.encashed_amount + cur_frm.doc.encashment_amount;
@@ -156,3 +173,5 @@ filters: { 'name': cur_frm.doc.company},
  //   cur_frm.set_value("cheque_status", "مدفوع");
 //    }
 //});
+
+
