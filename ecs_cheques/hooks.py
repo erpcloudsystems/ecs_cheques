@@ -11,6 +11,14 @@ app_license = "MIT"
 
 # Includes in <head>
 # ------------------
+doc_events = {
+"Payment Entry": {
+	"on_update_after_submit": "ecs_cheques.ecs_cheques.overrides.payment_entry.payment_entry.cheque"
+}
+}
+doctype_js = {
+	"Payment Entry": "ecs_cheques/overrides/payment_entry/payment_entry.js"
+}
 
 # include js, css files in header of desk.html
 # app_include_css = "/assets/ecs_cheques/css/ecs_cheques.css"
