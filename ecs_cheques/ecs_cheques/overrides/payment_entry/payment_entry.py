@@ -138,6 +138,7 @@ def cheque(doc, method=None):
 		})
 		new_doc.insert()
 		new_doc.submit()
+		frappe.db.set_value('Payment Entry', doc.name, 'cheque_action', '')
 
 	if doc.cheque_action == "إيداع شيك تحت التحصيل" and not doc.with_bank_commission:
 		frappe.db.sql(""" update `tabPayment Entry` set cheque_status = "تحت التحصيل" where name = %s""", doc.name)
@@ -174,6 +175,7 @@ def cheque(doc, method=None):
 		})
 		new_doc.insert()
 		new_doc.submit()
+		frappe.db.set_value('Payment Entry', doc.name, 'cheque_action', '')
 
 	if doc.cheque_action == "صرف شيك تحت التحصيل":
 		frappe.db.sql("""update `tabPayment Entry` set clearance_date = %s where name=%s """,
@@ -212,6 +214,7 @@ def cheque(doc, method=None):
 		})
 		new_doc.insert()
 		new_doc.submit()
+		frappe.db.set_value('Payment Entry', doc.name, 'cheque_action', '')
 
 	if doc.cheque_action == "رفض شيك تحت التحصيل" and doc.with_bank_commission:
 		frappe.db.sql(""" update `tabPayment Entry` set cheque_status = "مرفوض بالبنك" where name = %s""",
@@ -265,6 +268,7 @@ def cheque(doc, method=None):
 		})
 		new_doc.insert()
 		new_doc.submit()
+		frappe.db.set_value('Payment Entry', doc.name, 'cheque_action', '')
 
 	if doc.cheque_action == "رفض شيك تحت التحصيل" and not doc.with_bank_commission:
 		frappe.db.sql(""" update `tabPayment Entry` set cheque_status = "مرفوض بالبنك" where name = %s""",
@@ -302,6 +306,7 @@ def cheque(doc, method=None):
 		})
 		new_doc.insert()
 		new_doc.submit()
+		frappe.db.set_value('Payment Entry', doc.name, 'cheque_action', '')
 
 	if doc.cheque_action == "تظهير شيك":
 		frappe.db.sql(""" update `tabPayment Entry` set cheque_status = "مظهر" where name = %s""", doc.name)
@@ -340,6 +345,7 @@ def cheque(doc, method=None):
 		})
 		new_doc.insert()
 		new_doc.submit()
+		frappe.db.set_value('Payment Entry', doc.name, 'cheque_action', '')
 
 	if doc.cheque_action == "سحب شيك مرفوض بالبنك":
 		frappe.db.sql(""" update `tabPayment Entry` set cheque_status = "حافظة شيكات مرجعة" where name = %s""",
@@ -377,6 +383,7 @@ def cheque(doc, method=None):
 		})
 		new_doc.insert()
 		new_doc.submit()
+		frappe.db.set_value('Payment Entry', doc.name, 'cheque_action', '')
 
 	if not doc.encashment_amount and doc.cheque_action == "تسييل الشيك":
 		frappe.throw(_("برجاء إدخال مبلغ التسييل"))
@@ -425,6 +432,7 @@ def cheque(doc, method=None):
 		})
 		new_doc.insert()
 		new_doc.submit()
+		frappe.db.set_value('Payment Entry', doc.name, 'cheque_action', '')
 		frappe.db.sql(""" update `tabPayment Entry` set encashment_amount = 0 where name = %s""", doc.name)
 		doc.reload()
 
@@ -465,6 +473,7 @@ def cheque(doc, method=None):
 		})
 		new_doc.insert()
 		new_doc.submit()
+		frappe.db.set_value('Payment Entry', doc.name, 'cheque_action', '')
 
 	if not doc.bank_acc and doc.cheque_action == "صرف الشيك":
 		frappe.throw(_("برجاء تحديد الحساب البنكي"))
@@ -506,3 +515,4 @@ def cheque(doc, method=None):
 		})
 		new_doc.insert()
 		new_doc.submit()
+		frappe.db.set_value('Payment Entry', doc.name, 'cheque_action', '')

@@ -9,8 +9,8 @@
   "reference_date",
   "paid_amount",
   "payment_entry",
-  "bank",
   "column_break_6",
+  "cheque_type",
   "first_beneficiary",
   "person_name",
   "issuer_name",
@@ -57,44 +57,48 @@
    "read_only": 1
   },
   {
-   "columns": 2,
-   "fieldname": "bank",
-   "fieldtype": "Link",
-   "in_list_view": 1,
-   "label": "Bank",
-   "options": "Bank"
-  },
-  {
    "columns": 1,
    "fieldname": "first_beneficiary",
    "fieldtype": "Select",
    "in_list_view": 1,
    "label": "First Beneficiary",
-   "options": "\nPersonal\nCompany"
+   "options": "\nPersonal\nCompany",
+   "reqd": 1
   },
   {
    "columns": 2,
    "fieldname": "person_name",
    "fieldtype": "Data",
    "in_list_view": 1,
-   "label": "Beneficiary Name"
+   "label": "Beneficiary Name",
+   "reqd": 1
   },
   {
    "columns": 2,
    "fieldname": "issuer_name",
    "fieldtype": "Data",
    "in_list_view": 1,
-   "label": "Issuer Name"
+   "label": "Issuer Name",
+   "reqd": 1
   },
   {
    "fieldname": "column_break_6",
    "fieldtype": "Column Break"
+  },
+  {
+   "columns": 1,
+   "fieldname": "cheque_type",
+   "fieldtype": "Select",
+   "in_list_view": 1,
+   "label": "Cheque Type",
+   "options": "\nOpened\nCrossed\nEndorsed",
+   "reqd": 1
   }
  ],
  "index_web_pages_for_search": 1,
  "istable": 1,
  "links": [],
- "modified": "2021-08-10 14:48:26.112077",
+ "modified": "2021-08-10 19:07:09.936252",
  "modified_by": "Administrator",
  "module": "ECS Cheques",
  "name": "Cheque Table Pay",

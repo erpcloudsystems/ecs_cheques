@@ -27,7 +27,7 @@ frappe.ui.form.on("Payment Entry", {
         if (cur_frm.doc.docstatus == "1" && cur_frm.doc.mode_of_payment == "شيك" && cur_frm.doc.payment_type == "Pay" && cur_frm.doc.party_type == "Supplier" && cur_frm.doc.cheque_status_pay == "حافظة شيكات برسم الدفع"){
             set_field_options("cheque_action", ["صرف الشيك"]);
         }
-        if (cur_frm.doc.docstatus == "1" && cur_frm.doc.mode_of_payment == "شيك" && (cur_frm.doc.cheque_status == "مظهر" || cur_frm.doc.cheque_status == "محصل فوري" || cur_frm.doc.cheque_status == "مردود" || cur_frm.doc.cheque_status == "محصل" || cur_frm.doc.cheque_status_pay == "مدفوع") && cur_frm.doc.paid_amount == cur_frm.doc.encashed_amount){
+        if (cur_frm.doc.docstatus == "1" && cur_frm.doc.mode_of_payment == "شيك" && (cur_frm.doc.cheque_status == "مظهر" || cur_frm.doc.cheque_status == "محصل فوري" || cur_frm.doc.cheque_status == "مردود" || cur_frm.doc.cheque_status == "محصل" || cur_frm.doc.cheque_status_pay == "مدفوع")){
             set_field_options("cheque_action", [" "]);
         }
     }
@@ -76,6 +76,60 @@ frappe.ui.form.on("Payment Entry","first_beneficiary", function(frm){
         cur_frm.set_value("person_name",cur_frm.doc.company);
     }
 });
+
+frappe.ui.form.on('Payment Entry', 'bank_acc',  function(frm) {
+   if(cur_frm.doc.payment_type == "Receive" && cur_frm.doc.mode_of_payment == "شيك"){
+       frappe.call({ method: "frappe.client.get_value",
+args: { doctype: "Bank Account",
+fieldname: "co3_",
+filters: { 'name': cur_frm.doc.bank_acc},
+}, callback: function(r)
+{cur_frm.set_value("co3_", r.message.co3_);
+  } });
+   }
+
+});
+
+frappe.ui.form.on('Payment Entry', 'bank_acc',  function(frm) {
+   if(cur_frm.doc.payment_type == "Receive" && cur_frm.doc.mode_of_payment == "شيك"){
+       frappe.call({ method: "frappe.client.get_value",
+args: { doctype: "Bank Account",
+fieldname: "co4_",
+filters: { 'name': cur_frm.doc.bank_acc},
+}, callback: function(r)
+{cur_frm.set_value("co4_", r.message.co4_);
+  } });
+   }
+
+});
+
+frappe.ui.form.on('Payment Entry', 'bank_acc',  function(frm) {
+   if(cur_frm.doc.payment_type == "Receive" && cur_frm.doc.mode_of_payment == "شيك"){
+       frappe.call({ method: "frappe.client.get_value",
+args: { doctype: "Bank Account",
+fieldname: "co5_",
+filters: { 'name': cur_frm.doc.bank_acc},
+}, callback: function(r)
+{cur_frm.set_value("co5_", r.message.co5_);
+  } });
+   }
+
+});
+
+frappe.ui.form.on('Payment Entry', 'bank_acc',  function(frm) {
+   if(cur_frm.doc.payment_type == "Receive" && cur_frm.doc.mode_of_payment == "شيك"){
+       frappe.call({ method: "frappe.client.get_value",
+args: { doctype: "Bank Account",
+fieldname: "co6",
+filters: { 'name': cur_frm.doc.bank_acc},
+}, callback: function(r)
+{cur_frm.set_value("co6", r.message.co6);
+  } });
+   }
+
+});
+
+
 
 frappe.ui.form.on('Payment Entry', 'payment_type',  function(frm) {
    if(cur_frm.doc.payment_type == "Receive" && cur_frm.doc.mode_of_payment == "شيك"){

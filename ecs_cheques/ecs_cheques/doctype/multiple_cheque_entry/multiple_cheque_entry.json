@@ -22,6 +22,7 @@
   "party_type",
   "column_break_8",
   "party",
+  "party_name",
   "section_break_10",
   "cheque_bank",
   "bank_acc",
@@ -129,22 +130,24 @@
    "label": "Accounts Details"
   },
   {
+   "depends_on": "eval:doc.party_type == \"Customer\"",
    "fieldname": "paid_from",
    "fieldtype": "Link",
    "label": "Account Paid From",
-   "options": "Account",
-   "reqd": 1
+   "mandatory_depends_on": "eval:doc.party_type == \"Customer\"",
+   "options": "Account"
   },
   {
    "fieldname": "column_break_12",
    "fieldtype": "Column Break"
   },
   {
+   "depends_on": "eval:doc.party_type == \"Supplier\"",
    "fieldname": "paid_to",
    "fieldtype": "Link",
    "label": "Account Paid To",
-   "options": "Account",
-   "reqd": 1
+   "mandatory_depends_on": "eval:doc.party_type == \"Supplier\"",
+   "options": "Account"
   },
   {
    "fieldname": "section_break_16",
@@ -232,6 +235,12 @@
    "label": "Current Account",
    "options": "Account",
    "read_only": 1
+  },
+  {
+   "fieldname": "party_name",
+   "fieldtype": "Data",
+   "label": "Party Name",
+   "read_only": 1
   }
  ],
  "index_web_pages_for_search": 1,
@@ -242,7 +251,7 @@
    "link_fieldname": "reference_link"
   }
  ],
- "modified": "2021-08-10 15:02:38.790601",
+ "modified": "2021-08-10 18:49:51.238959",
  "modified_by": "Administrator",
  "module": "ECS Cheques",
  "name": "Multiple Cheque Entry",

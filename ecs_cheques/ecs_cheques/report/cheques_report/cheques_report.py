@@ -11,15 +11,6 @@ def execute(filters=None):
 	return columns, data
 
 def get_columns():
-	if filters.get("type") == "Receive":
-		columns +=  [
-			{
-				"label": _("Cheque Status"),
-				"fieldname": "cheque_status",
-				"fieldtype": "Data",
-				"width": 120
-			},
-	]
 	return [
 		{
 			"label": _("Payment"),
@@ -39,6 +30,12 @@ def get_columns():
 			"fieldname": "party_type",
 			"fieldtype": "Data",
 			"width": 100
+		},
+		{
+			"label": _("Status"),
+			"fieldname": "cheque_status",
+			"fieldtype": "Data",
+			"width": 120
 		},
 		{
 			"label": _("Party"),
@@ -110,7 +107,6 @@ def get_columns():
 
 	]
 
-
 def get_data(filters, columns):
 	item_price_qty_data = []
 	item_price_qty_data = get_item_price_qty_data(filters)
@@ -132,38 +128,39 @@ def get_item_price_qty_data(filters):
 		conditions += " and a.bank_acc=%(bank)s"
 	if filters.get("mode_of_payment"):
 		conditions += " and a.mode_of_payment=%(mode_of_payment)s"
-	if filters.get("sad"):
+	if filters.get("type") == "Receive":
 		item_results = frappe.db.sql("""
 			select
-				a.name as payment_entry,
-				a.reference_no as reference_no,
-				a.party_type as party_type,
-				a.Party as party,
-				a.cheque_status as cheque_status,
-				a.posting_date as posting_date,
-				a.reference_date as reference_date,
-				a.clearance_date as clearance_date,
-				a.paid_amount as paid_amount,
-				a.account as bank,
-				a.party_ as party_,
-				a.drawn_bank as drawn_bank ,
-				a.cheque_type as cheque_type ,
-				a.first_beneficiary as first_beneficiary ,
-				a.person_name as person_name 
-			from `tabPayment Entry` a 
-			where
-				docstatus =1
+							a.name as payment_entry,
+							a.reference_no as reference_no,
+							a.party_type as party_type,
+							a.party as party,
+							a.cheque_status as cheque_status,
+							a.posting_date as posting_date,
+							a.reference_date as reference_date,
+							a.clearance_date as clearance_date,
+							a.paid_amount as paid_amount,
+							a.account as bank,
+							a.party_ as party_,
+							a.drawn_bank as drawn_bank ,
+							a.cheque_type as cheque_type ,
+							a.first_beneficiary as first_beneficiary ,
+							a.person_name as person_name 
+							from `tabPayment Entry` a 
+					where
+						 docstatus =1
+						{conditions}
 				{conditions}
 			"""
 			.format(conditions=conditions), filters, as_dict=1)
-	else:
+	elif filters.get("type") == "Pay":
 		item_results = frappe.db.sql("""
 					select
 							a.name as payment_entry,
 							a.reference_no as reference_no,
 							a.party_type as party_type,
-							a.Party as party,
-							a.cheque_status as cheque_status,
+							a.party as party,
+							a.cheque_status_pay as cheque_status,
 							a.posting_date as posting_date,
 							a.reference_date as reference_date,
 							a.clearance_date as clearance_date,
@@ -181,6 +178,25 @@ def get_item_price_qty_data(filters):
 					"""
 									 .format(conditions=conditions), filters, as_dict=1)
 
+	elif filters.get("type") == "Internal Transfer":
+		item_results = frappe.db.sql("""
+					select
+							a.name as payment_entry,
+							a.reference_no as reference_no,
+							a.posting_date as posting_date,
+							a.reference_date as reference_date,
+							a.clearance_date as clearance_date,
+							a.paid_amount as paid_amount,
+							a.account as bank,
+							a.paid_from as paid_from,
+							a.paid_to as paid_to
+							
+							from `tabPayment Entry` a 
+					where
+						 docstatus =1
+						{conditions}
+					"""
+									 .format(conditions=conditions), filters, as_dict=1)
 
 	#price_list_names = list(set([item.price_list_name for item in item_results]))
 
@@ -201,10 +217,10 @@ def get_item_price_qty_data(filters):
 				'clearance_date': item_dict.clearance_date,
 				'paid_amount': item_dict.paid_amount,
 				'bank': item_dict.bank,
-				'drawn_bank': item_dict.drawn_bank,
+				'drawn_bank': item_dict.paid_from,
 				'cheque_type': item_dict.cheque_type,
 				'first_beneficiary': item_dict.first_beneficiary,
-				'person_name': item_dict.person_name,
+				'person_name': item_dict.paid_to,
 				'party_': item_dict.party_
 			}
 			result.append(data)

@@ -10,11 +10,13 @@ frappe.query_reports["Cheques Report"] = {
 			"fieldtype": "Select",
 			"options": ["Pay","Receive","Internal Transfer"],
 			"default": ["Pay"],
+			"reqd": 1,
 			on_change: function() {
-				let filter_based_on = frappe.query_report.get_filter_value('type');
-				frappe.query_report.toggle_filter_display('status', type === 'Pay');
-				frappe.query_report.toggle_filter_display('status_pay', type === 'Receive');
-
+				let type = frappe.query_report.get_filter_value('type');
+				frappe.query_report.toggle_filter_display('status_pay', type === 'Pay');
+				frappe.query_report.toggle_filter_display('status', type === 'Receive');
+				frappe.query_report.set_filter_value('status_pay', '');
+				frappe.query_report.set_filter_value('status', '');
 				frappe.query_report.refresh();
 			}
 		},
@@ -22,13 +24,15 @@ frappe.query_reports["Cheques Report"] = {
 			"fieldname":"status",
 			"label": __("Status"),
 			"fieldtype": "Select",
-			"options":  "\nحافظة شيكات برسم التحصيل\nمظهر\nتحت التحصيل\nمحصل\nمرفوض بالبنك\nحافظة شيكات مرجعة\nمردود\nمحصل فوري"
+			"options":  "\nحافظة شيكات برسم التحصيل\nمظهر\nتحت التحصيل\nمحصل\nمرفوض بالبنك\nحافظة شيكات مرجعة\nمردود\nمحصل فوري",
+			"hidden": 1
 		},
 		{
 			"fieldname":"status_pay",
 			"label": __("Status"),
 			"fieldtype": "Select",
-			"options":  "\nحافظة شيكات برسم الدفع\nمدفوع"
+			"options":  "\nحافظة شيكات برسم الدفع\nمدفوع",
+			
 		},
 		{
 			"fieldname": "from_date",

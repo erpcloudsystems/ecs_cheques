@@ -56,8 +56,9 @@
    "fieldname": "bank",
    "fieldtype": "Link",
    "in_list_view": 1,
-   "label": "Bank",
-   "options": "Bank"
+   "label": "Drawn Bank",
+   "options": "Bank",
+   "reqd": 1
   },
   {
    "fieldname": "column_break_6",
@@ -87,7 +88,8 @@
    "fieldtype": "Data",
    "in_list_view": 1,
    "label": "Beneficiary Name",
-   "mandatory_depends_on": "eval:doc.first_beneficiary == \"Personal\""
+   "mandatory_depends_on": "eval:doc.first_beneficiary == \"Personal\"",
+   "reqd": 1
   },
   {
    "columns": 1,
@@ -100,13 +102,14 @@
    "fieldname": "issuer_name",
    "fieldtype": "Data",
    "in_list_view": 1,
-   "label": "Issuer Name"
+   "label": "Issuer Name",
+   "reqd": 1
   }
  ],
  "index_web_pages_for_search": 1,
  "istable": 1,
  "links": [],
- "modified": "2021-08-10 14:42:50.189523",
+ "modified": "2021-08-10 19:13:37.720990",
  "modified_by": "Administrator",
  "module": "ECS Cheques",
  "name": "Cheque Table Receive",

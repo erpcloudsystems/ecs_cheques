@@ -13,6 +13,11 @@ frappe.ui.form.on("Multiple Cheque Entry", {
 	}
 });
 
+frappe.ui.form.on("Multiple Cheque Entry","party_type", function(frm){
+    cur_frm.set_value("party","");
+    cur_frm.set_value("party_name","");
+});
+
 frappe.ui.form.on("Multiple Cheque Entry","cheque_bank", function(frm){
     cur_frm.set_value("bank_acc","");
     cur_frm.set_value("account","");
@@ -46,8 +51,7 @@ frappe.ui.form.on("Multiple Cheque Entry", "on_submit", function(frm) {
 				cheque_bank: frm.doc.cheque_bank,
 				bank_acc: frm.doc.bank_acc,
 
-				drawn_bank: w.bank,
-				cheque_type: "Opened",
+				cheque_type: w.cheque_type,
 				reference_no: w.reference_no,
 				reference_date: w.reference_date,
 				paid_amount: w.paid_amount,
@@ -93,7 +97,7 @@ frappe.ui.form.on("Multiple Cheque Entry", "on_submit", function(frm) {
 		frm.set_query("party_type", function() {
 			return {
 				filters: [
-					["DocType","name", "in", ["Customer","Supplier","Employee"]]
+					["DocType","name", "in", ["Customer","Supplier"]]
 				]
 			};
 		});
@@ -109,7 +113,30 @@ frappe.ui.form.on('Multiple Cheque Entry', 'payment_type',  function(frm) {
     }
 });
 
+frappe.ui.form.on('Multiple Cheque Entry', 'party',  function(frm) {
 
+    if (cur_frm.doc.party_type =="Customer"){
+
+    frappe.call({ method: "frappe.client.get_value",
+	args: { doctype: "Customer",
+	fieldname: "customer_name",
+	filters: { 'name': cur_frm.doc.party},
+	}, callback: function(r)
+	{cur_frm.set_value("party_name", r.message.customer_name);
+  } });
+        }
+
+  if (cur_frm.doc.party_type =="Supplier"){
+
+    frappe.call({ method: "frappe.client.get_value",
+    args: { doctype: "Supplier",
+    fieldname: "supplier_name",
+    filters: { 'name': cur_frm.doc.party},
+    }, callback: function(r)
+    {cur_frm.set_value("party_name", r.message.supplier_name);
+  } });
+        }
+});
 
 frappe.ui.form.on('Multiple Cheque Entry', 'party_type',  function(frm) {
 
@@ -252,19 +279,16 @@ frappe.ui.form.on("Multiple Cheque Entry", "on_submit", function(frm) {
 
 frappe.ui.form.on("Cheque Table Pay","first_beneficiary", function(){
     for (var i = 0; i < cur_frm.doc.cheque_table_2.length; i++){
-        if(cur_frm.doc.cheque_table_2[i].first_beneficiary == "Company"){
-          cur_frm.doc.cheque_table_2[i].person_name = cur_frm.doc.party;
-            cur_frm.doc.cheque_table_2[i].issuer_name = cur_frm.doc.company;
-        }
+          cur_frm.doc.cheque_table_2[i].person_name = cur_frm.doc.party_name;
+          cur_frm.doc.cheque_table_2[i].issuer_name = cur_frm.doc.company;
     }
     cur_frm.refresh_field('cheque_table_2');
 });
 
 frappe.ui.form.on("Cheque Table Receive","first_beneficiary", function(){
     for (var i = 0; i < cur_frm.doc.cheque_table.length; i++){
-        if(cur_frm.doc.cheque_table[i].first_beneficiary == "Personal"){
           cur_frm.doc.cheque_table[i].person_name = cur_frm.doc.company;
-        }
+          cur_frm.doc.cheque_table[i].issuer_name = cur_frm.doc.party_name;
     }
     cur_frm.refresh_field('cheque_table');
 });
