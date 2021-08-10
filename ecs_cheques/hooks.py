@@ -14,6 +14,9 @@ app_license = "MIT"
 doc_events = {
 "Payment Entry": {
 	"on_update_after_submit": "ecs_cheques.ecs_cheques.overrides.payment_entry.payment_entry.cheque"
+},
+"Journal Entry": {
+	"on_cancel": "ecs_cheques.ecs_cheques.overrides.journal_entry.journal_entry.update_payment_entry_on_cancel"
 }
 }
 doctype_js = {
