@@ -64,6 +64,19 @@ frappe.ui.form.on("Payment Entry","bank_acc", function(frm){
     }
 });
 
+frappe.ui.form.on("Payment Entry","first_beneficiary", function(frm){
+    if(cur_frm.doc.payment_type == "Pay" && cur_frm.doc.first_beneficiary == "Company" && cur_frm.doc.mode_of_payment == "شيك"){
+        cur_frm.set_value("person_name",cur_frm.doc.party);
+        cur_frm.set_value("issuer_name",cur_frm.doc.company);
+    }
+});
+
+frappe.ui.form.on("Payment Entry","first_beneficiary", function(frm){
+    if(cur_frm.doc.payment_type == "Receive" && cur_frm.doc.first_beneficiary == "Personal" && cur_frm.doc.mode_of_payment == "شيك"){
+        cur_frm.set_value("person_name",cur_frm.doc.company);
+    }
+});
+
 frappe.ui.form.on('Payment Entry', 'payment_type',  function(frm) {
    if(cur_frm.doc.payment_type == "Receive" && cur_frm.doc.mode_of_payment == "شيك"){
        frappe.call({ method: "frappe.client.get_value",

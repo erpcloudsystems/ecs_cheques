@@ -1,0 +1,107 @@
+{
+ "actions": [],
+ "creation": "2021-08-10 12:51:59.695260",
+ "doctype": "DocType",
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "field_order": [
+  "reference_no",
+  "reference_date",
+  "paid_amount",
+  "payment_entry",
+  "bank",
+  "column_break_6",
+  "first_beneficiary",
+  "person_name",
+  "issuer_name",
+  "picture_of_check"
+ ],
+ "fields": [
+  {
+   "columns": 1,
+   "fieldname": "reference_no",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "Cheque No",
+   "reqd": 1
+  },
+  {
+   "columns": 1,
+   "fieldname": "reference_date",
+   "fieldtype": "Date",
+   "in_list_view": 1,
+   "label": "Cheque Date",
+   "reqd": 1
+  },
+  {
+   "columns": 1,
+   "fieldname": "paid_amount",
+   "fieldtype": "Currency",
+   "in_list_view": 1,
+   "label": "Amount",
+   "reqd": 1
+  },
+  {
+   "columns": 1,
+   "fieldname": "picture_of_check",
+   "fieldtype": "Attach",
+   "in_list_view": 1,
+   "label": "Attach"
+  },
+  {
+   "allow_on_submit": 1,
+   "fieldname": "payment_entry",
+   "fieldtype": "Link",
+   "label": "Payment Entry",
+   "options": "Payment Entry",
+   "read_only": 1
+  },
+  {
+   "columns": 2,
+   "fieldname": "bank",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "label": "Bank",
+   "options": "Bank"
+  },
+  {
+   "columns": 1,
+   "fieldname": "first_beneficiary",
+   "fieldtype": "Select",
+   "in_list_view": 1,
+   "label": "First Beneficiary",
+   "options": "\nPersonal\nCompany"
+  },
+  {
+   "columns": 2,
+   "fieldname": "person_name",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "Beneficiary Name"
+  },
+  {
+   "columns": 2,
+   "fieldname": "issuer_name",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "Issuer Name"
+  },
+  {
+   "fieldname": "column_break_6",
+   "fieldtype": "Column Break"
+  }
+ ],
+ "index_web_pages_for_search": 1,
+ "istable": 1,
+ "links": [],
+ "modified": "2021-08-10 14:48:26.112077",
+ "modified_by": "Administrator",
+ "module": "ECS Cheques",
+ "name": "Cheque Table Pay",
+ "owner": "Administrator",
+ "permissions": [],
+ "quick_entry": 1,
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "track_changes": 1
+}
