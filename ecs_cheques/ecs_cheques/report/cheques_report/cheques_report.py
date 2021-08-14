@@ -130,25 +130,26 @@ def get_item_price_qty_data(filters):
 		conditions += " and a.mode_of_payment=%(mode_of_payment)s"
 	if filters.get("type") == "Receive":
 		item_results = frappe.db.sql("""
-			select
-							a.name as payment_entry,
-							a.reference_no as reference_no,
-							a.party_type as party_type,
-							a.party as party,
-							a.cheque_status as cheque_status,
-							a.posting_date as posting_date,
-							a.reference_date as reference_date,
-							a.clearance_date as clearance_date,
-							a.paid_amount as paid_amount,
-							a.account as bank,
-							a.party_ as party_,
-							a.drawn_bank as drawn_bank ,
-							a.cheque_type as cheque_type ,
-							a.first_beneficiary as first_beneficiary ,
-							a.person_name as person_name 
-							from `tabPayment Entry` a 
+					select
+						a.name as payment_entry,
+						a.reference_no as reference_no,
+						a.party_type as party_type,
+						a.party as party,
+						a.cheque_status as cheque_status,
+						a.posting_date as posting_date,
+						a.reference_date as reference_date,
+						a.clearance_date as clearance_date,
+						a.paid_amount as paid_amount,
+						a.account as bank,
+						a.party_ as party_,
+						a.drawn_bank as drawn_bank ,
+						a.cheque_type as cheque_type ,
+						a.first_beneficiary as first_beneficiary ,
+						a.person_name as person_name 
+						from `tabPayment Entry` a 
 					where
-						 docstatus =1
+						a.mode_of_payment = 'شيك'
+						and docstatus =1
 						{conditions}
 				{conditions}
 			"""
@@ -156,24 +157,25 @@ def get_item_price_qty_data(filters):
 	elif filters.get("type") == "Pay":
 		item_results = frappe.db.sql("""
 					select
-							a.name as payment_entry,
-							a.reference_no as reference_no,
-							a.party_type as party_type,
-							a.party as party,
-							a.cheque_status_pay as cheque_status,
-							a.posting_date as posting_date,
-							a.reference_date as reference_date,
-							a.clearance_date as clearance_date,
-							a.paid_amount as paid_amount,
-							a.account as bank,
-							a.party_ as party_,
-							a.drawn_bank as drawn_bank ,
-							a.cheque_type as cheque_type ,
-							a.first_beneficiary as first_beneficiary ,
-							a.person_name as person_name 
-							from `tabPayment Entry` a 
+						a.name as payment_entry,
+						a.reference_no as reference_no,
+						a.party_type as party_type,
+						a.party as party,
+						a.cheque_status_pay as cheque_status,
+						a.posting_date as posting_date,
+						a.reference_date as reference_date,
+						a.clearance_date as clearance_date,
+						a.paid_amount as paid_amount,
+						a.account as bank,
+						a.party_ as party_,
+						a.drawn_bank as drawn_bank ,
+						a.cheque_type as cheque_type ,
+						a.first_beneficiary as first_beneficiary ,
+						a.person_name as person_name 
+						from `tabPayment Entry` a 
 					where
-						 docstatus =1
+						a.mode_of_payment = 'شيك'
+						and docstatus =1
 						{conditions}
 					"""
 									 .format(conditions=conditions), filters, as_dict=1)
@@ -181,19 +183,19 @@ def get_item_price_qty_data(filters):
 	elif filters.get("type") == "Internal Transfer":
 		item_results = frappe.db.sql("""
 					select
-							a.name as payment_entry,
-							a.reference_no as reference_no,
-							a.posting_date as posting_date,
-							a.reference_date as reference_date,
-							a.clearance_date as clearance_date,
-							a.paid_amount as paid_amount,
-							a.account as bank,
-							a.paid_from as paid_from,
-							a.paid_to as first_beneficiary
-							
-							from `tabPayment Entry` a 
+						a.name as payment_entry,
+						a.reference_no as reference_no,
+						a.posting_date as posting_date,
+						a.reference_date as reference_date,
+						a.clearance_date as clearance_date,
+						a.paid_amount as paid_amount,
+						a.account as bank,
+						a.paid_from as paid_from,
+						a.paid_to as first_beneficiary
+						from `tabPayment Entry` a 
 					where
-						 docstatus =1
+						a.mode_of_payment = 'شيك'
+						and docstatus =1
 						{conditions}
 					"""
 									 .format(conditions=conditions), filters, as_dict=1)
