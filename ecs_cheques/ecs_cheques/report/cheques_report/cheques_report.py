@@ -189,7 +189,7 @@ def get_item_price_qty_data(filters):
 							a.paid_amount as paid_amount,
 							a.account as bank,
 							a.paid_from as paid_from,
-							a.paid_to as paid_to
+							a.paid_to as first_beneficiary
 							
 							from `tabPayment Entry` a 
 					where

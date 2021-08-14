@@ -13,8 +13,8 @@ frappe.query_reports["Cheques Report"] = {
 			"reqd": 1,
 			on_change: function() {
 				let type = frappe.query_report.get_filter_value('type');
-				frappe.query_report.toggle_filter_display('status_pay', type === 'Pay');
-				frappe.query_report.toggle_filter_display('status', type === 'Receive');
+				frappe.query_report.toggle_filter_display('status', type === 'Pay');
+				frappe.query_report.toggle_filter_display('status_pay', type === 'Receive');
 				frappe.query_report.set_filter_value('status_pay', '');
 				frappe.query_report.set_filter_value('status', '');
 				frappe.query_report.refresh();

@@ -45,6 +45,12 @@ frappe.ui.form.on("Payment Entry", {
 	}
 });
 
+frappe.ui.form.on("Payment Entry","account", function(frm){
+    if (cur_frm.doc.mode_of_payment == "شيك" && cur_frm.doc.payment_type == "Internal Transfer"){
+        cur_frm.set_value("paid_from",cur_frm.doc.account);
+    }
+});
+
 frappe.ui.form.on("Payment Entry","cheque_bank", function(frm){
     cur_frm.set_value("bank_acc","");
     cur_frm.set_value("account","");
