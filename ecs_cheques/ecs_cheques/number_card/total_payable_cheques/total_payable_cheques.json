@@ -1,0 +1,23 @@
+{
+ "creation": "2021-08-14 20:05:19.723934",
+ "docstatus": 0,
+ "doctype": "Number Card",
+ "dynamic_filters_json": "{}",
+ "filters_json": "{\"type\":[\"Pay\"]}",
+ "function": "Count",
+ "idx": 0,
+ "is_public": 1,
+ "is_standard": 1,
+ "label": "Total Payable Cheques",
+ "modified": "2021-08-14 20:05:19.723934",
+ "modified_by": "Administrator",
+ "module": "ECS Cheques",
+ "name": "Total Payable Cheques",
+ "owner": "Administrator",
+ "report_field": "paid_amount",
+ "report_function": "Sum",
+ "report_name": "Cheques Report",
+ "show_percentage_stats": 1,
+ "stats_time_interval": "Daily",
+ "type": "Report"
+}
