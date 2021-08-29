@@ -1,9 +1,12 @@
 frappe.ui.form.on("Payment Entry", {
     refresh(frm) {
-        if (cur_frm.doc.docstatus == "1" && cur_frm.doc.mode_of_payment == "شيك" && cur_frm.doc.payment_type == "Receive" && cur_frm.doc.cheque_status == "حافظة شيكات برسم التحصيل"){
+        if (cur_frm.doc.docstatus == "1" && cur_frm.doc.mode_of_payment == "شيك" && cur_frm.doc.payment_type == "Receive" && cur_frm.doc.cheque_type == "Opened" && cur_frm.doc.cheque_status == "حافظة شيكات برسم التحصيل"){
             set_field_options("cheque_action", ["تظهير شيك","إيداع شيك تحت التحصيل","تحصيل فوري للشيك"]);
         }
-        if (cur_frm.doc.docstatus == "1" && cur_frm.doc.mode_of_payment == "شيك" && cur_frm.doc.payment_type == "Receive" &&  cur_frm.doc.cheque_status == "تحت التحصيل"){
+        if (cur_frm.doc.docstatus == "1" && cur_frm.doc.mode_of_payment == "شيك" && cur_frm.doc.payment_type == "Receive" && cur_frm.doc.cheque_type != "Opened" && cur_frm.doc.cheque_status == "حافظة شيكات برسم التحصيل"){
+            set_field_options("cheque_action", ["إيداع شيك تحت التحصيل","تحصيل فوري للشيك"]);
+        }
+        if (cur_frm.doc.docstatus == "1" && cur_frm.doc.mode_of_payment == "شيك" && cur_frm.doc.payment_type == "Receive" && cur_frm.doc.cheque_status == "تحت التحصيل"){
             set_field_options("cheque_action", ["رفض شيك تحت التحصيل","صرف شيك تحت التحصيل"]);
         }
         if (cur_frm.doc.docstatus == "1" && cur_frm.doc.mode_of_payment == "شيك" && cur_frm.doc.payment_type == "Receive" && cur_frm.doc.cheque_status == "مرفوض بالبنك"){
@@ -171,18 +174,6 @@ frappe.ui.form.on("Payment Entry", "encashment_amount", function(frm) {
 
 frappe.ui.form.on("Payment Entry", "validate", function(frm) {
     cur_frm.doc.encashment_amount = 0;
-});
-
-frappe.ui.form.on("Payment Entry", {
-setup: function(frm) {
-frm.set_query("party_type", function() {
-return {
-filters: [
-["DocType","name", "in", ["Customer","Supplier","Employee","Member","Student","Shareholder","Bank"]]
-]
-};
-});
-}
 });
 
 frappe.ui.form.on("Payment Entry", {
