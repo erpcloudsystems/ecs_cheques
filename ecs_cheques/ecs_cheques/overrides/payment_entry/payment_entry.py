@@ -76,7 +76,7 @@ def cheque(doc, method=None):
 			"cheque_no": doc.reference_no,
 			"cheque_date": doc.reference_date,
 			"pe_status": "محصل فوري",
-			"posting_date": doc.posting_date,
+			"posting_date": doc.cheque_action_date,
 			"accounts": accounts,
 			"payment_type": doc.payment_type
 
@@ -132,7 +132,7 @@ def cheque(doc, method=None):
 			"cheque_no": doc.reference_no,
 			"cheque_date": doc.reference_date,
 			"pe_status": "تحت التحصيل",
-			"posting_date": doc.posting_date,
+			"posting_date": doc.cheque_action_date,
 			"accounts": accounts,
 			"payment_type": doc.payment_type
 		})
@@ -169,7 +169,7 @@ def cheque(doc, method=None):
 			"cheque_no": doc.reference_no,
 			"cheque_date": doc.reference_date,
 			"pe_status": "تحت التحصيل",
-			"posting_date": doc.posting_date,
+			"posting_date": doc.cheque_action_date,
 			"accounts": accounts,
 			"payment_type": doc.payment_type
 		})
@@ -208,7 +208,7 @@ def cheque(doc, method=None):
 			"cheque_no": doc.reference_no,
 			"cheque_date": doc.reference_date,
 			"pe_status": "محصل",
-			"posting_date": doc.posting_date,
+			"posting_date": doc.cheque_action_date,
 			"accounts": accounts,
 			"payment_type": doc.payment_type
 		})
@@ -262,7 +262,7 @@ def cheque(doc, method=None):
 			"cheque_no": doc.reference_no,
 			"cheque_date": doc.reference_date,
 			"pe_status": "مرفوض بالبنك",
-			"posting_date": doc.posting_date,
+			"posting_date": doc.cheque_action_date,
 			"accounts": accounts,
 			"payment_type": doc.payment_type
 		})
@@ -300,7 +300,7 @@ def cheque(doc, method=None):
 			"cheque_no": doc.reference_no,
 			"cheque_date": doc.reference_date,
 			"pe_status": "مرفوض بالبنك",
-			"posting_date": doc.posting_date,
+			"posting_date": doc.cheque_action_date,
 			"accounts": accounts,
 			"payment_type": doc.payment_type
 		})
@@ -339,7 +339,7 @@ def cheque(doc, method=None):
 			"cheque_no": doc.reference_no,
 			"cheque_date": doc.reference_date,
 			"pe_status": "مظهر",
-			"posting_date": doc.posting_date,
+			"posting_date": doc.cheque_action_date,
 			"accounts": accounts,
 			"payment_type": doc.payment_type
 		})
@@ -377,7 +377,7 @@ def cheque(doc, method=None):
 			"cheque_no": doc.reference_no,
 			"cheque_date": doc.reference_date,
 			"pe_status": "حافظة شيكات مرجعة",
-			"posting_date": doc.posting_date,
+			"posting_date": doc.cheque_action_date,
 			"accounts": accounts,
 			"payment_type": doc.payment_type
 		})
@@ -426,7 +426,7 @@ def cheque(doc, method=None):
 			"cheque_no": doc.reference_no,
 			"cheque_date": doc.reference_date,
 			"pe_status": "حافظة شيكات مرجعة",
-			"posting_date": doc.posting_date,
+			"posting_date": doc.cheque_action_date,
 			"accounts": accounts,
 			"payment_type": doc.payment_type
 		})
@@ -467,7 +467,7 @@ def cheque(doc, method=None):
 			"cheque_no": doc.reference_no,
 			"cheque_date": doc.reference_date,
 			"pe_status": "مردود",
-			"posting_date": doc.posting_date,
+			"posting_date": doc.cheque_action_date,
 			"accounts": accounts,
 			"payment_type": doc.payment_type
 		})
@@ -509,7 +509,7 @@ def cheque(doc, method=None):
 			"cheque_no": doc.reference_no,
 			"cheque_date": doc.reference_date,
 			"pe_status": "مدفوع",
-			"posting_date": doc.posting_date,
+			"posting_date": doc.cheque_action_date,
 			"accounts": accounts,
 			"payment_type": doc.payment_type
 		})
