@@ -252,7 +252,7 @@
    "link_fieldname": "reference_link"
   }
  ],
- "modified": "2021-09-02 16:31:49.904771",
+ "modified": "2021-09-02 21:46:36.358004",
  "modified_by": "Administrator",
  "module": "ECS Cheques",
  "name": "Multiple Cheque Entry",
@@ -268,6 +268,7 @@
    "report": 1,
    "role": "System Manager",
    "share": 1,
+   "submit": 1,
    "write": 1
   }
  ],

@@ -20,7 +20,7 @@ def get_columns():
 			"width": 120
 		},
 		{
-			"label": _("Cheques No"),
+			"label": _("Cheque No"),
 			"fieldname": "reference_no",
 			"fieldtype": "Data",
 			"width": 120
@@ -45,7 +45,7 @@ def get_columns():
 		},
 
 		{
-			"label": _("Transaction Date"),
+			"label": _("Posting Date"),
 			"fieldname": "posting_date",
 			"fieldtype": "Date",
 			"width": 120

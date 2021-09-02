@@ -66,19 +66,12 @@
    "type": "Link"
   }
  ],
- "modified": "2021-08-14 20:09:27.788947",
- "modified_by": "Administrator",
+ "modified": "2021-09-02 21:13:12.985074",
+ "modified_by": "administrator",
  "module": "ECS Cheques",
  "name": "Cheques",
  "owner": "Administrator",
  "pin_to_bottom": 0,
  "pin_to_top": 1,
- "shortcuts": [
-  {
-   "doc_view": "Dashboard",
-   "label": "Cheque Dashboard",
-   "link_to": "Management",
-   "type": "Dashboard"
-  }
- ]
+ "shortcuts": []
 }

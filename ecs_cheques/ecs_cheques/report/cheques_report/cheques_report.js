@@ -24,7 +24,7 @@ frappe.query_reports["Cheques Report"] = {
 			"fieldname":"status",
 			"label": __("Status"),
 			"fieldtype": "Select",
-			"options":  "\nحافظة شيكات برسم التحصيل\nمظهر\nتحت التحصيل\nمحصل\nمرفوض بالبنك\nحافظة شيكات مرجعة\nمردود\nمحصل فوري",
+			"options":  "\nحافظة شيكات واردة \nمظهر\nتحت التحصيل\nمحصل\nمرفوض بالبنك\nحافظة شيكات مرجعة\nمردود\nمحصل فوري",
 			"hidden": 1
 		},
 		{
