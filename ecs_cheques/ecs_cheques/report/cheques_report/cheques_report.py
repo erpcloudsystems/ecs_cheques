@@ -142,9 +142,9 @@ def get_item_price_qty_data(filters):
 						a.paid_amount as paid_amount,
 						a.account as bank,
 						a.party_ as party_,
-						a.drawn_bank as drawn_bank ,
-						a.cheque_type as cheque_type ,
-						a.first_beneficiary as first_beneficiary ,
+						a.drawn_bank as drawn_bank,
+						a.cheque_type as cheque_type,
+						a.first_beneficiary as first_beneficiary,
 						a.person_name as person_name 
 						from `tabPayment Entry` a 
 					where
@@ -168,9 +168,9 @@ def get_item_price_qty_data(filters):
 						a.paid_amount as paid_amount,
 						a.account as bank,
 						a.party_ as party_,
-						a.drawn_bank as drawn_bank ,
-						a.cheque_type as cheque_type ,
-						a.first_beneficiary as first_beneficiary ,
+						a.drawn_bank as drawn_bank,
+						a.cheque_type as cheque_type,
+						a.first_beneficiary as first_beneficiary,
 						a.person_name as person_name 
 						from `tabPayment Entry` a 
 					where
@@ -219,10 +219,10 @@ def get_item_price_qty_data(filters):
 				'clearance_date': item_dict.clearance_date,
 				'paid_amount': item_dict.paid_amount,
 				'bank': item_dict.bank,
-				'drawn_bank': item_dict.paid_from,
+				'drawn_bank': item_dict.drawn_bank,
 				'cheque_type': item_dict.cheque_type,
 				'first_beneficiary': item_dict.first_beneficiary,
-				'person_name': item_dict.paid_to,
+				'person_name': item_dict.person_name,
 				'party_': item_dict.party_
 			}
 			result.append(data)
