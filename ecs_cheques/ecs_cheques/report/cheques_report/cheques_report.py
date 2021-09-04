@@ -83,7 +83,8 @@ def get_columns():
 		{
 			"label": _("Drawn Bank"),
 			"fieldname": "drawn_bank",
-			"fieldtype": "Data",
+			"fieldtype": "Link",
+			"options": "Bank",
 			"width": 120
 		},
 		{
