@@ -13,6 +13,18 @@ frappe.ui.form.on("Multiple Cheque Entry", {
 	}
 });
 
+frappe.ui.form.on("Multiple Cheque Entry", {
+	setup: function(frm) {
+		frm.set_query("cheque_bank", function() {
+			return {
+				filters: [
+					["Bank","company_bank", "=", '1']
+				]
+			};
+		});
+	}
+});
+
 frappe.ui.form.on("Multiple Cheque Entry","party_type", function(frm){
     cur_frm.set_value("party","");
     cur_frm.set_value("party_name","");
