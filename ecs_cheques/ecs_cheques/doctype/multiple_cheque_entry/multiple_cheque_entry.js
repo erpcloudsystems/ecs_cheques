@@ -13,6 +13,18 @@ frappe.ui.form.on("Multiple Cheque Entry", {
 	}
 });
 
+frappe.ui.form.on("Multiple Cheque Entry", {
+	setup: function(frm) {
+		frm.set_query("cheque_bank", function() {
+			return {
+				filters: [
+					["Bank","company_bank", "=", '1']
+				]
+			};
+		});
+	}
+});
+
 frappe.ui.form.on("Multiple Cheque Entry","party_type", function(frm){
     cur_frm.set_value("party","");
     cur_frm.set_value("party_name","");
@@ -76,6 +88,10 @@ frappe.ui.form.on("Multiple Cheque Entry", "on_submit", function(frm) {
 		const funcs = docs.map((doc) => {
 			frappe.call({
 				method: "frappe.client.insert",
+				args: {
+					doc: doc // doc object
+				},
+				method: "frappe.client.submit",
 				args: {
 					doc: doc // doc object
 				},
@@ -230,8 +246,6 @@ frappe.ui.form.on("Multiple Cheque Entry", "on_submit", function(frm) {
 				cheque_status: frm.doc.cheque_status,
 				party_type: frm.doc.party_type,
 				party: frm.doc.party,
-				cheque_bank: frm.doc.cheque_bank,
-				bank_acc: frm.doc.bank_acc,
 				paid_from: frm.doc.paid_from,
 				paid_to: frm.doc.paid_to,
 
@@ -262,6 +276,10 @@ frappe.ui.form.on("Multiple Cheque Entry", "on_submit", function(frm) {
 		const funcs = docs.map((doc) => {
 			frappe.call({
 				method: "frappe.client.insert",
+				args: {
+					doc: doc // doc object
+				},
+				method: "frappe.client.submit",
 				args: {
 					doc: doc // doc object
 				},
