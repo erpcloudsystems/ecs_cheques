@@ -51,7 +51,7 @@ def cheque(doc, method=None):
 		frappe.throw(_(" برجاء تحديد حساب برسم الدفع داخل الحساب البنكي وإعادة إختيار الحساب البنكي مرة أخرى "))
 
 	if doc.cheque_action == "تحصيل فوري للشيك":
-		frappe.db.sql("""update `tabPayment Entry` set clearance_date = %s where name=%s """, (nowdate(), doc.name))
+		frappe.db.sql("""update `tabPayment Entry` set clearance_date = %s where name=%s """, (doc.cheque_action_date, doc.name))
 		frappe.db.sql(""" update `tabPayment Entry` set cheque_status = "محصل فوري" where name = %s""", doc.name)
 		frappe.db.sql(""" update `tabPayment Entry` set cheque_action = "" where name = %s""", doc.name)
 		accounts = [
@@ -280,8 +280,7 @@ def cheque(doc, method=None):
 		doc.reload()
 
 	if doc.cheque_action == "صرف شيك تحت التحصيل":
-		frappe.db.sql("""update `tabPayment Entry` set clearance_date = %s where name=%s """,
-					  (nowdate(), doc.name))
+		frappe.db.sql("""update `tabPayment Entry` set clearance_date = %s where name=%s """, (doc.cheque_action_date, doc.name))
 		frappe.db.sql(""" update `tabPayment Entry` set cheque_status = "محصل" where name = %s""", doc.name)
 		frappe.db.sql(""" update `tabPayment Entry` set cheque_action = "" where name = %s""", doc.name)
 		accounts = [
@@ -556,8 +555,7 @@ def cheque(doc, method=None):
 		frappe.throw(_("برجاء تحديد الحساب البنكي"))
 
 	if doc.cheque_action == "صرف الشيك":
-		frappe.db.sql("""update `tabPayment Entry` set clearance_date = %s where name=%s """,
-					  (nowdate(), doc.name))
+		frappe.db.sql("""update `tabPayment Entry` set clearance_date = %s where name=%s """, (doc.cheque_action_date, doc.name))
 		frappe.db.sql(""" update `tabPayment Entry` set cheque_status_pay = "مدفوع" where name = %s""", doc.name)
 		frappe.db.sql(""" update `tabPayment Entry` set cheque_action = "" where name = %s""", doc.name)
 		accounts = [
