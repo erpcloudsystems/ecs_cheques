@@ -1,6 +1,6 @@
 {
  "aggregate_function_based_on": "base_paid_amount",
- "color": "#00a619",
+ "color": "#29CD42",
  "creation": "2021-08-14 20:06:15.765467",
  "docstatus": 0,
  "doctype": "Number Card",
@@ -12,7 +12,7 @@
  "is_public": 1,
  "is_standard": 1,
  "label": "Monthly Receivable Cheques",
- "modified": "2021-08-14 20:06:15.765467",
+ "modified": "2021-11-20 15:55:50.063960",
  "modified_by": "Administrator",
  "module": "ECS Cheques",
  "name": "Monthly Receivable Cheques",

@@ -1,0 +1,32 @@
+{
+ "cards": [
+  {
+   "card": "Total Payable Cheques"
+  },
+  {
+   "card": "Total Receivable Cheques"
+  }
+ ],
+ "charts": [
+  {
+   "chart": "Payable Cheques",
+   "width": "Full"
+  },
+  {
+   "chart": "Receivable Cheques",
+   "width": "Full"
+  }
+ ],
+ "creation": "2021-11-20 15:31:20.832868",
+ "dashboard_name": "Cheque Dashboard",
+ "docstatus": 0,
+ "doctype": "Dashboard",
+ "idx": 0,
+ "is_default": 0,
+ "is_standard": 1,
+ "modified": "2021-11-20 16:07:00.659008",
+ "modified_by": "Administrator",
+ "module": "ECS Cheques",
+ "name": "Management",
+ "owner": "Administrator"
+}
