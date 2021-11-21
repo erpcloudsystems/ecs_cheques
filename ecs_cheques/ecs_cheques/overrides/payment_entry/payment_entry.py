@@ -213,11 +213,8 @@ def cheque(doc, method=None):
 			"reference_link": doc.name,
 			"cheque_no": doc.reference_no,
 			"cheque_date": doc.reference_date,
-<<<<<<< HEAD
 			"pe_status": "محصل",
-=======
 			"pe_status": "تحت التحصيل 2",
->>>>>>> 9b69039407e1e2a7b3bd80a0a934cf767b1aa7e4
 			"posting_date": doc.cheque_action_date,
 			"accounts": accounts,
 			"payment_type": doc.payment_type,
@@ -272,11 +269,8 @@ def cheque(doc, method=None):
 			"reference_link": doc.name,
 			"cheque_no": doc.reference_no,
 			"cheque_date": doc.reference_date,
-<<<<<<< HEAD
 			"pe_status": "مرفوض بالبنك",
-=======
 			"pe_status": "تحت التحصيل 2",
->>>>>>> 9b69039407e1e2a7b3bd80a0a934cf767b1aa7e4
 			"posting_date": doc.cheque_action_date,
 			"accounts": accounts,
 			"payment_type": doc.payment_type,
@@ -413,11 +407,8 @@ def cheque(doc, method=None):
 			"reference_link": doc.name,
 			"cheque_no": doc.reference_no,
 			"cheque_date": doc.reference_date,
-<<<<<<< HEAD
 			"pe_status": "مظهر",
-=======
 			"pe_status": "مرفوض بالبنك",
->>>>>>> 9b69039407e1e2a7b3bd80a0a934cf767b1aa7e4
 			"posting_date": doc.cheque_action_date,
 			"accounts": accounts,
 			"payment_type": doc.payment_type,
@@ -458,11 +449,8 @@ def cheque(doc, method=None):
 			"reference_link": doc.name,
 			"cheque_no": doc.reference_no,
 			"cheque_date": doc.reference_date,
-<<<<<<< HEAD
 			"pe_status": "حافظة شيكات مرجعة",
-=======
 			"pe_status": "مظهر",
->>>>>>> 9b69039407e1e2a7b3bd80a0a934cf767b1aa7e4
 			"posting_date": doc.cheque_action_date,
 			"accounts": accounts,
 			"payment_type": doc.payment_type,
