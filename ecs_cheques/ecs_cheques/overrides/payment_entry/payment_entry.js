@@ -15,10 +15,10 @@ frappe.ui.form.on("Payment Entry", {
         if (cur_frm.doc.docstatus == "1" && cur_frm.doc.mode_of_payment == "شيك" && cur_frm.doc.payment_type == "Receive" && cur_frm.doc.paid_amount != cur_frm.doc.encashed_amount && cur_frm.doc.cheque_status == "مرفوض بالبنك"){
             set_field_options("cheque_action", ["إيداع شيك تحت التحصيل","تسييل الشيك"]);
         }
-        if (cur_frm.doc.docstatus == "1" && cur_frm.doc.mode_of_payment == "شيك" && cur_frm.doc.payment_type == "Receive" && cur_frm.doc.encashed_amount == 0 && cur_frm.doc.cheque_status == "حافظة شيكات مرجعة"){
+        if (cur_frm.doc.docstatus == "1" && cur_frm.doc.mode_of_payment == "شيك" && cur_frm.doc.payment_type == "Receive" && cur_frm.doc.cheque_status == "حافظة شيكات مرجعة"){
                 set_field_options("cheque_action", ["إيداع شيك تحت التحصيل","رد شيك","تسييل الشيك"]);
         }
-        if (cur_frm.doc.docstatus == "1" && cur_frm.doc.mode_of_payment == "شيك" && cur_frm.doc.payment_type == "Receive" && cur_frm.doc.encashed_amount > 0 && cur_frm.doc.paid_amount > cur_frm.doc.encashed_amount && cur_frm.doc.cheque_status == "حافظة شيكات مرجعة"){
+        if (cur_frm.doc.docstatus == "1" && cur_frm.doc.mode_of_payment == "شيك" && cur_frm.doc.payment_type == "Receive" && cur_frm.doc.paid_amount > cur_frm.doc.encashed_amount && cur_frm.doc.cheque_status == "حافظة شيكات مرجعة"){
                 set_field_options("cheque_action", ["رد شيك","تسييل الشيك"]);
         }
         if (cur_frm.doc.docstatus == "1" && cur_frm.doc.mode_of_payment == "شيك" && cur_frm.doc.payment_type == "Receive" && cur_frm.doc.paid_amount > cur_frm.doc.encashed_amount && cur_frm.doc.encashed_amount != 0){
