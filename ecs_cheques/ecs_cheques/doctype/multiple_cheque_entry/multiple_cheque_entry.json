@@ -13,6 +13,7 @@
   "naming_series",
   "payment_type",
   "mode_of_payment",
+  "mode_of_payment_type",
   "column_break_3",
   "company",
   "posting_date",
@@ -81,12 +82,11 @@
   },
   {
    "allow_on_submit": 1,
-   "default": "\u0634\u064a\u0643",
    "fieldname": "mode_of_payment",
    "fieldtype": "Link",
    "label": "Mode Of Payment",
    "options": "Mode of Payment",
-   "read_only": 1
+   "reqd": 1
   },
   {
    "default": "\u062d\u0627\u0641\u0638\u0629 \u0634\u064a\u0643\u0627\u062a \u0648\u0627\u0631\u062f\u0629",
@@ -242,6 +242,14 @@
    "fieldtype": "Data",
    "label": "Party Name",
    "read_only": 1
+  },
+  {
+   "depends_on": "eval:doc.mode_of_payment",
+   "fetch_from": "mode_of_payment.type",
+   "fieldname": "mode_of_payment_type",
+   "fieldtype": "Data",
+   "label": "Mode Of Payment Type",
+   "read_only": 1
   }
  ],
  "index_web_pages_for_search": 1,
@@ -252,7 +260,7 @@
    "link_fieldname": "reference_link"
   }
  ],
- "modified": "2021-09-02 21:46:36.358004",
+ "modified": "2021-11-29 11:07:59.424177",
  "modified_by": "Administrator",
  "module": "ECS Cheques",
  "name": "Multiple Cheque Entry",

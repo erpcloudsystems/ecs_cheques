@@ -55,7 +55,7 @@ frappe.ui.form.on("Multiple Cheque Entry", "on_submit", function(frm) {
 				reference_link: frm.doc.name,
 				payment_type: frm.doc.payment_type,
 				mode_of_payment: frm.doc.mode_of_payment,
-				cheque_status_pay: frm.doc.cheque_status_pay,
+				mode_of_payment_type: frm.doc.mode_of_payment_type,
 				party_type: frm.doc.party_type,
 				party: frm.doc.party,
 				paid_from: frm.doc.payable_account,
@@ -230,6 +230,11 @@ frappe.ui.form.on('Multiple Cheque Entry', 'party_type',  function(frm) {
 
 });
 
+frappe.ui.form.on("Multiple Cheque Entry", "validate", function(frm) {
+    if(frm.doc.mode_of_payment_type != "Cheque"){
+        frappe.throw("The Type Of The Selected Mode Of Payment Is Not Cheque ... Please Select Another Mode Of Payment With Cheque Type ");
+    }
+ });
 
 frappe.ui.form.on("Multiple Cheque Entry", "on_submit", function(frm) {
     if(frm.doc.payment_type == "Receive"){
@@ -243,7 +248,7 @@ frappe.ui.form.on("Multiple Cheque Entry", "on_submit", function(frm) {
 				reference_link: frm.doc.name,
 				payment_type: frm.doc.payment_type,
 				mode_of_payment: frm.doc.mode_of_payment,
-				cheque_status: frm.doc.cheque_status,
+				mode_of_payment_type: frm.doc.mode_of_payment_type,
 				party_type: frm.doc.party_type,
 				party: frm.doc.party,
 				paid_from: frm.doc.paid_from,
