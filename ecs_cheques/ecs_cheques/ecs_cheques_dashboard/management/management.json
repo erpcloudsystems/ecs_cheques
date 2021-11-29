@@ -4,6 +4,7 @@
    "card": "Total Payable Cheques"
   },
   {
+<<<<<<< HEAD
    "card": "Monthly Payable Cheques"
   },
   {
@@ -11,6 +12,9 @@
   },
   {
    "card": "Monthly Receivable Cheques"
+=======
+   "card": "Total Receivable Cheques"
+>>>>>>> 5356795c2f1a2225afb2728726693c60ba84374a
   }
  ],
  "charts": [
@@ -21,6 +25,7 @@
   {
    "chart": "Receivable Cheques",
    "width": "Full"
+<<<<<<< HEAD
   },
   {
    "chart": "Bank Balance",
@@ -28,14 +33,24 @@
   }
  ],
  "creation": "2021-08-14 20:08:27.238389",
+=======
+  }
+ ],
+ "creation": "2021-11-20 15:31:20.832868",
+>>>>>>> 5356795c2f1a2225afb2728726693c60ba84374a
  "dashboard_name": "Cheque Dashboard",
  "docstatus": 0,
  "doctype": "Dashboard",
  "idx": 0,
  "is_default": 0,
  "is_standard": 1,
+<<<<<<< HEAD
  "modified": "2021-11-17 16:35:34.752223",
  "modified_by": "test@erpcloud.systems",
+=======
+ "modified": "2021-11-20 16:07:00.659008",
+ "modified_by": "Administrator",
+>>>>>>> 5356795c2f1a2225afb2728726693c60ba84374a
  "module": "ECS Cheques",
  "name": "Management",
  "owner": "Administrator"

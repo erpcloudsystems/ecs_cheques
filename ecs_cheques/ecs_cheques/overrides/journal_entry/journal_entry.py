@@ -16,6 +16,7 @@ def update_payment_entry_on_cancel(doc, method=None):
 	if doc.reference_doctype == "Payment Entry" and doc.reference_link and (doc.pe_status == "محصل فوري" or doc.pe_status == "مظهر" or doc.pe_status == "تحت التحصيل"):
 		frappe.db.sql(""" update `tabPayment Entry` set cheque_status = "حافظة شيكات واردة" where name = %s""", doc.reference_link)
 		frappe.db.sql(""" update `tabPayment Entry` set cheque_action = "" where name = %s""", doc.reference_link)
+		frappe.db.sql(""" update `tabPayment Entry` set clearance_date = NULL where name = %s""", doc.reference_link)
 
 	if doc.reference_doctype == "Payment Entry" and doc.pe_status == "تحت التحصيل 2":
 		frappe.db.sql(""" update `tabPayment Entry` set cheque_status = "مرفوض بالبنك" where name = %s""", doc.reference_link)
@@ -24,6 +25,7 @@ def update_payment_entry_on_cancel(doc, method=None):
 	if doc.reference_doctype == "Payment Entry" and doc.reference_link and (doc.pe_status == "محصل" or doc.pe_status == "مرفوض بالبنك"):
 		frappe.db.sql(""" update `tabPayment Entry` set cheque_status = "تحت التحصيل" where name = %s""", doc.reference_link)
 		frappe.db.sql(""" update `tabPayment Entry` set cheque_action = "" where name = %s""", doc.reference_link)
+		frappe.db.sql(""" update `tabPayment Entry` set clearance_date = NULL where name = %s""", doc.reference_link)
 
 	if doc.reference_doctype == "Payment Entry" and doc.reference_link and doc.pe_status == "حافظة شيكات مرجعة":
 		frappe.db.sql(""" update `tabPayment Entry` set cheque_status = "مرفوض بالبنك" where name = %s""", doc.reference_link)
@@ -32,3 +34,4 @@ def update_payment_entry_on_cancel(doc, method=None):
 	if doc.reference_doctype == "Payment Entry" and doc.reference_link and doc.pe_status == "مدفوع":
 		frappe.db.sql(""" update `tabPayment Entry` set cheque_status_pay = "حافظة شيكات برسم الدفع" where name = %s""", doc.reference_link)
 		frappe.db.sql(""" update `tabPayment Entry` set cheque_action = "" where name = %s""", doc.reference_link)
+		frappe.db.sql(""" update `tabPayment Entry` set clearance_date = NULL where name = %s""", doc.reference_link)
