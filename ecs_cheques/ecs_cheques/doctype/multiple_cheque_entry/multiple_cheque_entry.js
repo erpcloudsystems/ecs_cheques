@@ -25,6 +25,18 @@ frappe.ui.form.on("Multiple Cheque Entry", {
 	}
 });
 
+frappe.ui.form.on("Multiple Cheque Entry", {
+	setup: function(frm) {
+		frm.set_query("mode_of_payment", function() {
+			return {
+				filters: [
+					["Mode of Payment","type", "=", 'Cheque']
+				]
+			};
+		});
+	}
+});
+
 frappe.ui.form.on("Multiple Cheque Entry","party_type", function(frm){
     cur_frm.set_value("party","");
     cur_frm.set_value("party_name","");
