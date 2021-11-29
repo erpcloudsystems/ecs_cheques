@@ -248,6 +248,7 @@
    "fetch_from": "mode_of_payment.type",
    "fieldname": "mode_of_payment_type",
    "fieldtype": "Data",
+   "hidden": 1,
    "label": "Mode Of Payment Type",
    "read_only": 1
   }
@@ -260,7 +261,7 @@
    "link_fieldname": "reference_link"
   }
  ],
- "modified": "2021-11-29 11:07:59.424177",
+ "modified": "2021-11-29 12:46:26.598020",
  "modified_by": "Administrator",
  "module": "ECS Cheques",
  "name": "Multiple Cheque Entry",
