@@ -1,36 +1,36 @@
 frappe.ui.form.on("Payment Entry", {
     refresh(frm) {
-        if (cur_frm.doc.docstatus == "1" && cur_frm.doc.mode_of_payment == "شيك" && cur_frm.doc.payment_type == "Receive" && cur_frm.doc.cheque_type == "Opened" && cur_frm.doc.cheque_status == "حافظة شيكات واردة"){
+        if (cur_frm.doc.docstatus == "1" && cur_frm.doc.mode_of_payment_type == "Cheque" && cur_frm.doc.payment_type == "Receive" && cur_frm.doc.cheque_type == "Opened" && cur_frm.doc.cheque_status == "حافظة شيكات واردة"){
             set_field_options("cheque_action", ["تظهير شيك","إيداع شيك تحت التحصيل","تحصيل فوري للشيك"]);
         }
-        if (cur_frm.doc.docstatus == "1" && cur_frm.doc.mode_of_payment == "شيك" && cur_frm.doc.payment_type == "Receive" && cur_frm.doc.cheque_type != "Opened" && cur_frm.doc.cheque_status == "حافظة شيكات واردة"){
+        if (cur_frm.doc.docstatus == "1" && cur_frm.doc.mode_of_payment_type == "Cheque" && cur_frm.doc.payment_type == "Receive" && cur_frm.doc.cheque_type != "Opened" && cur_frm.doc.cheque_status == "حافظة شيكات واردة"){
             set_field_options("cheque_action", ["إيداع شيك تحت التحصيل","تحصيل فوري للشيك"]);
         }
-        if (cur_frm.doc.docstatus == "1" && cur_frm.doc.mode_of_payment == "شيك" && cur_frm.doc.payment_type == "Receive" && cur_frm.doc.cheque_status == "تحت التحصيل"){
+        if (cur_frm.doc.docstatus == "1" && cur_frm.doc.mode_of_payment_type == "Cheque" && cur_frm.doc.payment_type == "Receive" && cur_frm.doc.cheque_status == "تحت التحصيل"){
             set_field_options("cheque_action", ["رفض شيك تحت التحصيل","صرف شيك تحت التحصيل"]);
         }
-        if (cur_frm.doc.docstatus == "1" && cur_frm.doc.mode_of_payment == "شيك" && cur_frm.doc.payment_type == "Receive" && cur_frm.doc.cheque_status == "مرفوض بالبنك"){
+        if (cur_frm.doc.docstatus == "1" && cur_frm.doc.mode_of_payment_type == "Cheque" && cur_frm.doc.payment_type == "Receive" && cur_frm.doc.cheque_status == "مرفوض بالبنك"){
             set_field_options("cheque_action", ["إيداع شيك تحت التحصيل"]);
         }
-        if (cur_frm.doc.docstatus == "1" && cur_frm.doc.mode_of_payment == "شيك" && cur_frm.doc.payment_type == "Receive" && cur_frm.doc.paid_amount != cur_frm.doc.encashed_amount && cur_frm.doc.cheque_status == "مرفوض بالبنك"){
+        if (cur_frm.doc.docstatus == "1" && cur_frm.doc.mode_of_payment_type == "Cheque" && cur_frm.doc.payment_type == "Receive" && cur_frm.doc.paid_amount != cur_frm.doc.encashed_amount && cur_frm.doc.cheque_status == "مرفوض بالبنك"){
             set_field_options("cheque_action", ["إيداع شيك تحت التحصيل","تسييل الشيك"]);
         }
-        if (cur_frm.doc.docstatus == "1" && cur_frm.doc.mode_of_payment == "شيك" && cur_frm.doc.payment_type == "Receive" && cur_frm.doc.cheque_status == "حافظة شيكات مرجعة"){
+        if (cur_frm.doc.docstatus == "1" && cur_frm.doc.mode_of_payment_type == "Cheque" && cur_frm.doc.payment_type == "Receive" && cur_frm.doc.cheque_status == "حافظة شيكات مرجعة"){
                 set_field_options("cheque_action", ["إيداع شيك تحت التحصيل","رد شيك","تسييل الشيك"]);
         }
-        if (cur_frm.doc.docstatus == "1" && cur_frm.doc.mode_of_payment == "شيك" && cur_frm.doc.payment_type == "Receive" && cur_frm.doc.paid_amount > cur_frm.doc.encashed_amount && cur_frm.doc.cheque_status == "حافظة شيكات مرجعة"){
+        if (cur_frm.doc.docstatus == "1" && cur_frm.doc.mode_of_payment_type == "Cheque" && cur_frm.doc.payment_type == "Receive" && cur_frm.doc.paid_amount > cur_frm.doc.encashed_amount && cur_frm.doc.cheque_status == "حافظة شيكات مرجعة"){
                 set_field_options("cheque_action", ["رد شيك","تسييل الشيك"]);
         }
-        if (cur_frm.doc.docstatus == "1" && cur_frm.doc.mode_of_payment == "شيك" && cur_frm.doc.payment_type == "Receive" && cur_frm.doc.paid_amount > cur_frm.doc.encashed_amount && cur_frm.doc.encashed_amount != 0){
+        if (cur_frm.doc.docstatus == "1" && cur_frm.doc.mode_of_payment_type == "Cheque" && cur_frm.doc.payment_type == "Receive" && cur_frm.doc.paid_amount > cur_frm.doc.encashed_amount && cur_frm.doc.encashed_amount != 0){
                 set_field_options("cheque_action", ["تسييل الشيك"]);
         }
-        if (cur_frm.doc.docstatus == "1" && cur_frm.doc.mode_of_payment == "شيك" && cur_frm.doc.payment_type == "Receive" && cur_frm.doc.paid_amount == cur_frm.doc.encashed_amount && cur_frm.doc.cheque_status == "حافظة شيكات مرجعة"){
+        if (cur_frm.doc.docstatus == "1" && cur_frm.doc.mode_of_payment_type == "Cheque" && cur_frm.doc.payment_type == "Receive" && cur_frm.doc.paid_amount == cur_frm.doc.encashed_amount && cur_frm.doc.cheque_status == "حافظة شيكات مرجعة"){
                 set_field_options("cheque_action", ["رد شيك"]);
         }
-        if (cur_frm.doc.docstatus == "1" && cur_frm.doc.mode_of_payment == "شيك" && cur_frm.doc.payment_type == "Pay" && cur_frm.doc.party_type == "Supplier" && cur_frm.doc.cheque_status_pay == "حافظة شيكات برسم الدفع"){
+        if (cur_frm.doc.docstatus == "1" && cur_frm.doc.mode_of_payment_type == "Cheque" && cur_frm.doc.payment_type == "Pay" && cur_frm.doc.party_type == "Supplier" && cur_frm.doc.cheque_status_pay == "حافظة شيكات برسم الدفع"){
             set_field_options("cheque_action", ["صرف الشيك"]);
         }
-        if (cur_frm.doc.docstatus == "1" && cur_frm.doc.mode_of_payment == "شيك" && (cur_frm.doc.cheque_status == "مظهر" || cur_frm.doc.cheque_status == "محصل فوري" || cur_frm.doc.cheque_status == "مردود" || cur_frm.doc.cheque_status == "محصل" || cur_frm.doc.cheque_status_pay == "مدفوع")){
+        if (cur_frm.doc.docstatus == "1" && cur_frm.doc.mode_of_payment_type == "Cheque" && (cur_frm.doc.cheque_status == "مظهر" || cur_frm.doc.cheque_status == "محصل فوري" || cur_frm.doc.cheque_status == "مردود" || cur_frm.doc.cheque_status == "محصل" || cur_frm.doc.cheque_status_pay == "مدفوع")){
             set_field_options("cheque_action", [" "]);
         }
     }
@@ -61,7 +61,7 @@ frappe.ui.form.on("Payment Entry", {
 });
 
 frappe.ui.form.on("Payment Entry","account", function(frm){
-    if (cur_frm.doc.mode_of_payment == "شيك" && cur_frm.doc.payment_type == "Internal Transfer"){
+    if (cur_frm.doc.mode_of_payment_type == "Cheque" && cur_frm.doc.payment_type == "Internal Transfer"){
         cur_frm.set_value("paid_from",cur_frm.doc.account);
     }
 });
@@ -80,26 +80,26 @@ frappe.ui.form.on("Payment Entry","bank_acc", function(frm){
 });
 
 frappe.ui.form.on("Payment Entry","bank_acc", function(frm){
-    if(cur_frm.doc.payment_type == "Pay" && cur_frm.doc.mode_of_payment == "شيك"){
+    if(cur_frm.doc.payment_type == "Pay" && cur_frm.doc.mode_of_payment_type == "Cheque"){
         cur_frm.set_value("paid_from",cur_frm.doc.collection_fee_account);
     }
 });
 
 frappe.ui.form.on("Payment Entry","first_beneficiary", function(frm){
-    if(cur_frm.doc.payment_type == "Pay" && cur_frm.doc.first_beneficiary == "Company" && cur_frm.doc.mode_of_payment == "شيك"){
+    if(cur_frm.doc.payment_type == "Pay" && cur_frm.doc.first_beneficiary == "Company" && cur_frm.doc.mode_of_payment_type == "Cheque"){
         cur_frm.set_value("person_name",cur_frm.doc.party);
         cur_frm.set_value("issuer_name",cur_frm.doc.company);
     }
 });
 
 frappe.ui.form.on("Payment Entry","first_beneficiary", function(frm){
-    if(cur_frm.doc.payment_type == "Receive" && cur_frm.doc.first_beneficiary == "Personal" && cur_frm.doc.mode_of_payment == "شيك"){
+    if(cur_frm.doc.payment_type == "Receive" && cur_frm.doc.first_beneficiary == "Personal" && cur_frm.doc.mode_of_payment_type == "Cheque"){
         cur_frm.set_value("person_name",cur_frm.doc.company);
     }
 });
 
 frappe.ui.form.on('Payment Entry', 'bank_acc',  function(frm) {
-   if(cur_frm.doc.payment_type == "Receive" && cur_frm.doc.mode_of_payment == "شيك"){
+   if(cur_frm.doc.payment_type == "Receive" && cur_frm.doc.mode_of_payment_type == "Cheque"){
        frappe.call({ method: "frappe.client.get_value",
 args: { doctype: "Bank Account",
 fieldname: "co3_",
@@ -112,7 +112,7 @@ filters: { 'name': cur_frm.doc.bank_acc},
 });
 
 frappe.ui.form.on('Payment Entry', 'bank_acc',  function(frm) {
-   if(cur_frm.doc.payment_type == "Receive" && cur_frm.doc.mode_of_payment == "شيك"){
+   if(cur_frm.doc.payment_type == "Receive" && cur_frm.doc.mode_of_payment_type == "Cheque"){
        frappe.call({ method: "frappe.client.get_value",
 args: { doctype: "Bank Account",
 fieldname: "co4_",
@@ -125,7 +125,7 @@ filters: { 'name': cur_frm.doc.bank_acc},
 });
 
 frappe.ui.form.on('Payment Entry', 'bank_acc',  function(frm) {
-   if(cur_frm.doc.payment_type == "Receive" && cur_frm.doc.mode_of_payment == "شيك"){
+   if(cur_frm.doc.payment_type == "Receive" && cur_frm.doc.mode_of_payment_type == "Cheque"){
        frappe.call({ method: "frappe.client.get_value",
 args: { doctype: "Bank Account",
 fieldname: "co5_",
@@ -138,7 +138,7 @@ filters: { 'name': cur_frm.doc.bank_acc},
 });
 
 frappe.ui.form.on('Payment Entry', 'bank_acc',  function(frm) {
-   if(cur_frm.doc.payment_type == "Receive" && cur_frm.doc.mode_of_payment == "شيك"){
+   if(cur_frm.doc.payment_type == "Receive" && cur_frm.doc.mode_of_payment_type == "Cheque"){
        frappe.call({ method: "frappe.client.get_value",
 args: { doctype: "Bank Account",
 fieldname: "co6",
@@ -153,7 +153,7 @@ filters: { 'name': cur_frm.doc.bank_acc},
 
 
 frappe.ui.form.on('Payment Entry', 'payment_type',  function(frm) {
-   if(cur_frm.doc.payment_type == "Receive" && cur_frm.doc.mode_of_payment == "شيك"){
+   if(cur_frm.doc.payment_type == "Receive" && cur_frm.doc.mode_of_payment_type == "Cheque"){
        frappe.call({ method: "frappe.client.get_value",
 args: { doctype: "Company",
 fieldname: "default_incoming_cheque_wallet_account",
@@ -166,7 +166,7 @@ filters: { 'name': cur_frm.doc.company},
 });
 
 frappe.ui.form.on('Payment Entry', 'mode_of_payment',  function(frm) {
-   if(cur_frm.doc.payment_type == "Receive" && cur_frm.doc.mode_of_payment == "شيك"){
+   if(cur_frm.doc.payment_type == "Receive" && cur_frm.doc.mode_of_payment_type == "Cheque"){
        frappe.call({ method: "frappe.client.get_value",
 args: { doctype: "Company",
 fieldname: "default_incoming_cheque_wallet_account",
@@ -213,10 +213,10 @@ filters: [
 });
 
 frappe.ui.form.on("Payment Entry", "on_submit", function(frm) {
-    if (frm.doc.mode_of_payment == "شيك" && frm.doc.payment_type == "Receive" && frm.doc.cheque_){
+    if (frm.doc.mode_of_payment_type == "Cheque" && frm.doc.payment_type == "Receive" && frm.doc.cheque_){
     frappe.db.set_value("Cheque Table",  frm.doc.cheque_table_no, "payment_entry", frm.doc.name)
     }
-    if (frm.doc.mode_of_payment == "شيك" && frm.doc.payment_type == "Pay" && frm.doc.cheque_){
+    if (frm.doc.mode_of_payment_type == "Cheque" && frm.doc.payment_type == "Pay" && frm.doc.cheque_){
     frappe.db.set_value("Cheque Table Pay",  frm.doc.cheque_table_no2, "payment_entry", frm.doc.name)
     }
 });
@@ -256,11 +256,5 @@ filters: { 'name': cur_frm.doc.company},
    }
 
 });
-
-//frappe.ui.form.on("Payment Entry", "onload", function(frm) {
-  //  if(frm.doc.paid_amount == frm.doc.encashment_amount){
- //   cur_frm.set_value("cheque_status", "مدفوع");
-//    }
-//});
 
 
