@@ -149,7 +149,7 @@ def get_item_price_qty_data(filters):
 						a.person_name as person_name 
 						from `tabPayment Entry` a 
 					where
-						a.mode_of_payment = 'شيك'
+						a.mode_of_payment_type = 'Cheque'
 						and docstatus =1
 						{conditions}
 				{conditions}
@@ -175,7 +175,7 @@ def get_item_price_qty_data(filters):
 						a.person_name as person_name 
 						from `tabPayment Entry` a 
 					where
-						a.mode_of_payment = 'شيك'
+						a.mode_of_payment_type = 'Cheque'
 						and docstatus =1
 						{conditions}
 					"""
@@ -195,7 +195,7 @@ def get_item_price_qty_data(filters):
 						a.paid_to as first_beneficiary
 						from `tabPayment Entry` a 
 					where
-						a.mode_of_payment = 'شيك'
+						a.mode_of_payment_type = 'Cheque'
 						and docstatus =1
 						{conditions}
 					"""
