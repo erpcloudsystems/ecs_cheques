@@ -50,6 +50,9 @@ def cheque(doc, method=None):
 	if not doc.payable_account and doc.cheque_action == "صرف الشيك":
 		frappe.throw(_(" برجاء تحديد حساب برسم الدفع داخل الحساب البنكي وإعادة إختيار الحساب البنكي مرة أخرى "))
 
+	if (doc.cheque_action_date <= doc.reference_date) and (doc.cheque_action == "تحصيل فوري للشيك" or doc.cheque_action == "صرف شيك تحت التحصيل" or doc.cheque_action == "صرف الشيك") and (doc.cheque_type == "Crossed" or doc.cheque_type == "Issued To First Beneficiary"):
+		frappe.throw(_(" لا يمكن صرف الشيك قبل تاريخ الشيك "))
+
 	if doc.cheque_action == "تحصيل فوري للشيك":
 		frappe.db.sql("""update `tabPayment Entry` set clearance_date = %s where name=%s """, (doc.cheque_action_date, doc.name))
 		frappe.db.sql(""" update `tabPayment Entry` set cheque_status = "محصل فوري" where name = %s""", doc.name)
@@ -191,7 +194,7 @@ def cheque(doc, method=None):
 		accounts = [
 			{
 				"doctype": "Journal Entry Account",
-				"account": default_payback_cheque_wallet_account,
+				"account": doc.collection_fee_account,
 				"credit": 0,
 				"debit": doc.paid_amount,
 				"debit_in_account_currency": doc.paid_amount,
@@ -199,7 +202,7 @@ def cheque(doc, method=None):
 			},
 			{
 				"doctype": "Journal Entry Account",
-				"account": doc.paid_to,
+				"account": default_payback_cheque_wallet_account,
 				"debit": 0,
 				"credit": doc.paid_amount,
 				"credit_in_account_currency": doc.paid_amount,
@@ -230,7 +233,7 @@ def cheque(doc, method=None):
 		accounts = [
 			{
 				"doctype": "Journal Entry Account",
-				"account": default_payback_cheque_wallet_account,
+				"account": doc.collection_fee_account,
 				"credit": 0,
 				"debit": doc.paid_amount,
 				"debit_in_account_currency": doc.paid_amount,
@@ -246,7 +249,7 @@ def cheque(doc, method=None):
 			},
 			{
 				"doctype": "Journal Entry Account",
-				"account": doc.paid_to,
+				"account": default_payback_cheque_wallet_account,
 				"debit": 0,
 				"credit": doc.paid_amount,
 				"credit_in_account_currency": doc.paid_amount,
