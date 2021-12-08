@@ -50,8 +50,8 @@ def cheque(doc, method=None):
 	if not doc.payable_account and doc.cheque_action == "صرف الشيك":
 		frappe.throw(_(" برجاء تحديد حساب برسم الدفع داخل الحساب البنكي وإعادة إختيار الحساب البنكي مرة أخرى "))
 
-	if (doc.cheque_action_date <= doc.reference_date) and (doc.cheque_action == "تحصيل فوري للشيك" or doc.cheque_action == "صرف شيك تحت التحصيل" or doc.cheque_action == "صرف الشيك") and (doc.cheque_type == "Crossed" or doc.cheque_type == "Issued To First Beneficiary"):
-		frappe.throw(_(" لا يمكن صرف الشيك قبل تاريخ الشيك "))
+	if (doc.cheque_action_date < doc.reference_date) and (doc.cheque_action == "تحصيل فوري للشيك" or doc.cheque_action == "صرف شيك تحت التحصيل" or doc.cheque_action == "صرف الشيك") and (doc.cheque_type == "Crossed" or doc.cheque_type == "Issued To First Beneficiary"):
+		frappe.throw(_(" لا يمكن صرف الشيك قبل تاريخ استحقاقه "))
 
 	if doc.cheque_action == "تحصيل فوري للشيك":
 		frappe.db.sql("""update `tabPayment Entry` set clearance_date = %s where name=%s """, (doc.cheque_action_date, doc.name))
