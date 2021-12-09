@@ -56,18 +56,32 @@ frappe.query_reports["Cheques Report"] = {
 	    "formatter": function (value, row, column, data, default_formatter) {
                 value = default_formatter(value, row, column, data);
 
-
                 if (column.fieldname == "reference_date" && data && frappe.datetime.get_diff(data.reference_date, frappe.datetime.nowdate()) <= 15) {
                      value = "<span style='color:red;font-weight: bold;'>" + value + "</span>";
                 }else if(column.fieldname == "reference_date" && data && frappe.datetime.get_diff(data.reference_date, frappe.datetime.nowdate()) > 15){
                 }else if(column.fieldname == "reference_date" && data && frappe.datetime.get_diff(data.reference_date, frappe.datetime.nowdate()) > 15){
                     value =  value ;
+                }else if (column && data && data.cheque_status == "محصل فوري") {
+                     value = "<span style='background-color:#8CFA97;font-weight: bold;'>" + value + "</span>";
+                }else if (column && data && data.cheque_status == "محصل") {
+                     value = "<span style='background-color:#8CFA97;font-weight: bold;'>" + value + "</span>";
+                }else if (column && data && data.cheque_status == "مدفوع") {
+                     value = "<span style='background-color:#8CFA97;font-weight: bold;'>" + value + "</span>";
+                }else if (column && data && data.cheque_status == "حافظة شيكات مرجعة") {
+                     value = "<span style='background-color:#FAA58C;font-weight: bold;'>" + value + "</span>";
+                }else if (column && data && data.cheque_status == "مرفوض بالبنك") {
+                     value = "<span style='background-color:#FAA58C;font-weight: bold;'>" + value + "</span>";
+                }else if (column && data && data.cheque_status == "مردود") {
+                     value = "<span style='background-color:#FAA58C;font-weight: bold;'>" + value + "</span>";
+                }else if (column && data && data.cheque_status == "تحت التحصيل") {
+                     value = "<span style='background-color:#FAD98C;font-weight: bold;'>" + value + "</span>";
+                }else if (column && data && data.cheque_status == "مظهر") {
+                     value = "<span style='background-color:#FAD98C;font-weight: bold;'>" + value + "</span>";
+                }else if (column && data && data.cheque_status == "حافظة شيكات واردة") {
+                     value = "<span style='background-color:#C8CDFE;font-weight: bold;'>" + value + "</span>";
+                }else if (column && data && data.cheque_status == "حافظة شيكات برسم الدفع") {
+                     value = "<span style='background-color:#C8CDFE;font-weight: bold;'>" + value + "</span>";
                 }
-
-
-
-
-
                 return value;
             }
 }

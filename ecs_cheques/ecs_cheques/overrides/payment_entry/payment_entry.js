@@ -10,10 +10,10 @@ frappe.ui.form.on("Payment Entry", {
             set_field_options("cheque_action", ["رفض شيك تحت التحصيل","صرف شيك تحت التحصيل"]);
         }
         if (cur_frm.doc.docstatus == "1" && cur_frm.doc.mode_of_payment_type == "Cheque" && cur_frm.doc.payment_type == "Receive" && cur_frm.doc.cheque_status == "مرفوض بالبنك"){
-            set_field_options("cheque_action", ["إيداع شيك تحت التحصيل"]);
+            set_field_options("cheque_action", ["رد شيك","إيداع شيك تحت التحصيل"]);
         }
         if (cur_frm.doc.docstatus == "1" && cur_frm.doc.mode_of_payment_type == "Cheque" && cur_frm.doc.payment_type == "Receive" && cur_frm.doc.paid_amount != cur_frm.doc.encashed_amount && cur_frm.doc.cheque_status == "مرفوض بالبنك"){
-            set_field_options("cheque_action", ["إيداع شيك تحت التحصيل","تسييل الشيك"]);
+            set_field_options("cheque_action", ["رد شيك","إيداع شيك تحت التحصيل","تسييل الشيك"]);
         }
         if (cur_frm.doc.docstatus == "1" && cur_frm.doc.mode_of_payment_type == "Cheque" && cur_frm.doc.payment_type == "Receive" && cur_frm.doc.cheque_status == "حافظة شيكات مرجعة"){
                 set_field_options("cheque_action", ["إيداع شيك تحت التحصيل","رد شيك","تسييل الشيك"]);
@@ -93,8 +93,23 @@ frappe.ui.form.on("Payment Entry","first_beneficiary", function(frm){
 });
 
 frappe.ui.form.on("Payment Entry","first_beneficiary", function(frm){
-    if(cur_frm.doc.payment_type == "Receive" && cur_frm.doc.first_beneficiary == "Personal" && cur_frm.doc.mode_of_payment_type == "Cheque"){
+    if(cur_frm.doc.payment_type == "Pay" && cur_frm.doc.first_beneficiary == "Personal" && cur_frm.doc.mode_of_payment_type == "Cheque"){
+        cur_frm.set_value("person_name","");
+        cur_frm.set_value("issuer_name",cur_frm.doc.company);
+    }
+});
+
+frappe.ui.form.on("Payment Entry","first_beneficiary", function(frm){
+    if(cur_frm.doc.payment_type == "Receive" && cur_frm.doc.first_beneficiary == "Company" && cur_frm.doc.mode_of_payment_type == "Cheque"){
         cur_frm.set_value("person_name",cur_frm.doc.company);
+        cur_frm.set_value("issuer_name",cur_frm.doc.party);
+    }
+});
+
+frappe.ui.form.on("Payment Entry","first_beneficiary", function(frm){
+    if(cur_frm.doc.payment_type == "Receive" && cur_frm.doc.first_beneficiary == "Personal" && cur_frm.doc.mode_of_payment_type == "Cheque"){
+        cur_frm.set_value("person_name","");
+        cur_frm.set_value("issuer_name","");
     }
 });
 
