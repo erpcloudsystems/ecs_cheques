@@ -1,10 +1,10 @@
 frappe.ui.form.on("Payment Entry", {
     refresh(frm) {
         if (cur_frm.doc.docstatus == "1" && cur_frm.doc.mode_of_payment_type == "Cheque" && cur_frm.doc.payment_type == "Receive" && cur_frm.doc.cheque_type == "Opened" && cur_frm.doc.cheque_status == "حافظة شيكات واردة"){
-            set_field_options("cheque_action", ["تظهير شيك","إيداع شيك تحت التحصيل","تحصيل فوري للشيك"]);
+            set_field_options("cheque_action", ["تحويل إلى حافظة شيكات أخرى","تظهير شيك","إيداع شيك تحت التحصيل","تحصيل فوري للشيك"]);
         }
         if (cur_frm.doc.docstatus == "1" && cur_frm.doc.mode_of_payment_type == "Cheque" && cur_frm.doc.payment_type == "Receive" && cur_frm.doc.cheque_type != "Opened" && cur_frm.doc.cheque_status == "حافظة شيكات واردة"){
-            set_field_options("cheque_action", ["إيداع شيك تحت التحصيل","تحصيل فوري للشيك"]);
+            set_field_options("cheque_action", ["تحويل إلى حافظة شيكات أخرى","إيداع شيك تحت التحصيل","تحصيل فوري للشيك"]);
         }
         if (cur_frm.doc.docstatus == "1" && cur_frm.doc.mode_of_payment_type == "Cheque" && cur_frm.doc.payment_type == "Receive" && cur_frm.doc.cheque_status == "تحت التحصيل"){
             set_field_options("cheque_action", ["رفض شيك تحت التحصيل","صرف شيك تحت التحصيل"]);
@@ -34,6 +34,18 @@ frappe.ui.form.on("Payment Entry", {
             set_field_options("cheque_action", [" "]);
         }
     }
+});
+
+frappe.ui.form.on("Payment Entry", {
+	setup: function(frm) {
+		frm.set_query("new_mode_of_payment", function() {
+			return {
+				filters: [
+					["Mode of Payment","type", "=", 'Cheque']
+				]
+			};
+		});
+	}
 });
 
 frappe.ui.form.on("Payment Entry", {
