@@ -70,7 +70,7 @@
    "fieldtype": "Select",
    "in_list_view": 1,
    "label": "Cheque Type",
-   "options": "\nOpened\nCrossed\nEndorsed",
+   "options": "\nOpened\nCrossed\nEndorsed\nIssued To First Beneficiary",
    "reqd": 1
   },
   {
@@ -109,7 +109,7 @@
  "index_web_pages_for_search": 1,
  "istable": 1,
  "links": [],
- "modified": "2021-08-10 19:13:37.720990",
+ "modified": "2021-12-08 13:46:10.305589",
  "modified_by": "Administrator",
  "module": "ECS Cheques",
  "name": "Cheque Table Receive",

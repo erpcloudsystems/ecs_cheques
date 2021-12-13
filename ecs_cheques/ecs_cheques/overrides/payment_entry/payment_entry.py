@@ -50,7 +50,10 @@ def cheque(doc, method=None):
 	if not doc.payable_account and doc.cheque_action == "صرف الشيك":
 		frappe.throw(_(" برجاء تحديد حساب برسم الدفع داخل الحساب البنكي وإعادة إختيار الحساب البنكي مرة أخرى "))
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> d0158d71032069e100f7ec3e8c2111a9607aa3ed
 	if doc.cheque_action == "تحويل إلى حافظة شيكات أخرى":
 		new_mode_of_payment_account = frappe.db.get_value('Mode of Payment Account', {'parent': doc.new_mode_of_payment}, 'default_account')
 		old_mode_of_payment_account = frappe.db.get_value("Mode of Payment Account", {'parent': doc.mode_of_payment}, 'default_account')
@@ -100,8 +103,11 @@ def cheque(doc, method=None):
 			doc.new_mode_of_payment = ""
 			frappe.db.commit()
 
+<<<<<<< HEAD
 
 
+=======
+>>>>>>> d0158d71032069e100f7ec3e8c2111a9607aa3ed
 	if doc.cheque_action == "تحصيل فوري للشيك":
 		frappe.db.sql("""update `tabPayment Entry` set clearance_date = %s where name=%s """, (doc.cheque_action_date, doc.name))
 		frappe.db.sql(""" update `tabPayment Entry` set cheque_status = "محصل فوري" where name = %s""", doc.name)
@@ -243,7 +249,7 @@ def cheque(doc, method=None):
 		accounts = [
 			{
 				"doctype": "Journal Entry Account",
-				"account": default_payback_cheque_wallet_account,
+				"account": doc.collection_fee_account,
 				"credit": 0,
 				"debit": doc.paid_amount,
 				"debit_in_account_currency": doc.paid_amount,
@@ -251,7 +257,7 @@ def cheque(doc, method=None):
 			},
 			{
 				"doctype": "Journal Entry Account",
-				"account": doc.paid_to,
+				"account": default_payback_cheque_wallet_account,
 				"debit": 0,
 				"credit": doc.paid_amount,
 				"credit_in_account_currency": doc.paid_amount,
@@ -282,7 +288,7 @@ def cheque(doc, method=None):
 		accounts = [
 			{
 				"doctype": "Journal Entry Account",
-				"account": default_payback_cheque_wallet_account,
+				"account": doc.collection_fee_account,
 				"credit": 0,
 				"debit": doc.paid_amount,
 				"debit_in_account_currency": doc.paid_amount,
@@ -298,7 +304,7 @@ def cheque(doc, method=None):
 			},
 			{
 				"doctype": "Journal Entry Account",
-				"account": doc.paid_to,
+				"account": default_payback_cheque_wallet_account,
 				"debit": 0,
 				"credit": doc.paid_amount,
 				"credit_in_account_currency": doc.paid_amount,

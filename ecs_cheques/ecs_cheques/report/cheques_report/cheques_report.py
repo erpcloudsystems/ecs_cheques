@@ -17,25 +17,19 @@ def get_columns():
 			"fieldname": "payment_entry",
 			"fieldtype": "Link",
 			"options": "Payment Entry",
-			"width": 120
+			"width": 140
 		},
 		{
 			"label": _("Cheque No"),
 			"fieldname": "reference_no",
 			"fieldtype": "Data",
-			"width": 120
+			"width": 110
 		},
 		{
 			"label": _("Party Type"),
 			"fieldname": "party_type",
 			"fieldtype": "Data",
-			"width": 100
-		},
-		{
-			"label": _("Status"),
-			"fieldname": "cheque_status",
-			"fieldtype": "Data",
-			"width": 120
+			"width": 95
 		},
 		{
 			"label": _("Party"),
@@ -43,7 +37,12 @@ def get_columns():
 			"fieldtype": "Data",
 			"width": 100
 		},
-
+		{
+			"label": _("Status"),
+			"fieldname": "cheque_status",
+			"fieldtype": "Data",
+			"width": 150
+		},
 		{
 			"label": _("Posting Date"),
 			"fieldname": "posting_date",
@@ -63,10 +62,22 @@ def get_columns():
 			"width": 120
 		},
 		{
-			"label": _("Amount"),
+			"label": _("Cheque Amount"),
 			"fieldname": "paid_amount",
 			"fieldtype": "Currency",
-			"width": 120
+			"width": 140
+		},
+		{
+			"label": _("Encashed Amount"),
+			"fieldname": "encashed_amount",
+			"fieldtype": "Currency",
+			"width": 140
+		},
+		{
+			"label": _("Remaining Amount"),
+			"fieldname": "remaining_amount",
+			"fieldtype": "Currency",
+			"width": 150
 		},
 		{
 			"label": _("Bank"),
@@ -141,6 +152,8 @@ def get_item_price_qty_data(filters):
 						a.reference_date as reference_date,
 						a.clearance_date as clearance_date,
 						a.paid_amount as paid_amount,
+						a.encashed_amount as encashed_amount,
+						a.remaining_amount as remaining_amount,
 						a.account as bank,
 						a.party_ as party_,
 						a.drawn_bank as drawn_bank,
@@ -149,7 +162,7 @@ def get_item_price_qty_data(filters):
 						a.person_name as person_name 
 						from `tabPayment Entry` a 
 					where
-						a.mode_of_payment = 'شيك'
+						a.mode_of_payment_type = 'Cheque'
 						and docstatus =1
 						{conditions}
 				{conditions}
@@ -175,7 +188,7 @@ def get_item_price_qty_data(filters):
 						a.person_name as person_name 
 						from `tabPayment Entry` a 
 					where
-						a.mode_of_payment = 'شيك'
+						a.mode_of_payment_type = 'Cheque'
 						and docstatus =1
 						{conditions}
 					"""
@@ -195,7 +208,7 @@ def get_item_price_qty_data(filters):
 						a.paid_to as first_beneficiary
 						from `tabPayment Entry` a 
 					where
-						a.mode_of_payment = 'شيك'
+						a.mode_of_payment_type = 'Cheque'
 						and docstatus =1
 						{conditions}
 					"""
@@ -219,6 +232,8 @@ def get_item_price_qty_data(filters):
 				'reference_date': item_dict.reference_date,
 				'clearance_date': item_dict.clearance_date,
 				'paid_amount': item_dict.paid_amount,
+				'encashed_amount': item_dict.encashed_amount,
+				'remaining_amount': item_dict.remaining_amount,
 				'bank': item_dict.bank,
 				'drawn_bank': item_dict.drawn_bank,
 				'cheque_type': item_dict.cheque_type,
