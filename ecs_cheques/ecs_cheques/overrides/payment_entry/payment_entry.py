@@ -50,8 +50,54 @@ def cheque(doc, method=None):
 	if not doc.payable_account and doc.cheque_action == "صرف الشيك":
 		frappe.throw(_(" برجاء تحديد حساب برسم الدفع داخل الحساب البنكي وإعادة إختيار الحساب البنكي مرة أخرى "))
 
-	if (doc.cheque_action_date < doc.reference_date) and (doc.cheque_action == "تحصيل فوري للشيك" or doc.cheque_action == "صرف شيك تحت التحصيل" or doc.cheque_action == "صرف الشيك") and (doc.cheque_type == "Crossed" or doc.cheque_type == "Issued To First Beneficiary"):
-		frappe.throw(_(" لا يمكن صرف الشيك قبل تاريخ استحقاقه "))
+	if doc.cheque_action == "تحويل إلى حافظة شيكات أخرى":
+		new_mode_of_payment_account = frappe.db.get_value('Mode of Payment Account', {'parent': doc.new_mode_of_payment}, 'default_account')
+		old_mode_of_payment_account = frappe.db.get_value("Mode of Payment Account", {'parent': doc.mode_of_payment}, 'default_account')
+		frappe.db.sql(""" update `tabPayment Entry` set cheque_action = "" where name = %s""", doc.name)
+		if not new_mode_of_payment_account == old_mode_of_payment_account:
+			accounts = [
+				{
+					"doctype": "Journal Entry Account",
+					"account": new_mode_of_payment_account,
+					"credit": 0,
+					"debit": doc.paid_amount,
+					"debit_in_account_currency": doc.paid_amount,
+					"user_remark": doc.name
+				},
+				{
+					"doctype": "Journal Entry Account",
+					"account": old_mode_of_payment_account,
+					"credit": doc.paid_amount,
+					"debit": 0,
+					"credit_in_account_currency": doc.paid_amount,
+					"user_remark": doc.name
+				}
+			]
+			new_doc = frappe.get_doc({
+				"doctype": "Journal Entry",
+				"voucher_type": "Bank Entry",
+				"reference_doctype": "Payment Entry",
+				"reference_link": doc.name,
+				"cheque_no": doc.reference_no,
+				"cheque_date": doc.reference_date,
+				"pe_status": "حافظة شيكات واردة",
+				"posting_date": doc.cheque_action_date,
+				"accounts": accounts,
+				"payment_type": doc.payment_type,
+				"user_remark": doc.party_name
+
+			})
+			new_doc.insert()
+			new_doc.submit()
+			frappe.db.sql(""" update `tabPayment Entry` set cheque_action_date = NULL where name = %s""", doc.name)
+			doc.reload()
+
+		if new_mode_of_payment_account == old_mode_of_payment_account:
+			doc.logs = str(doc.logs) + "\n" + str(doc.new_mode_of_payment) + " " + doc.cheque_action_date
+			doc.cheque_action = ""
+			doc.cheque_action_date = ""
+			doc.new_mode_of_payment = ""
+			frappe.db.commit()
 
 	if doc.cheque_action == "تحصيل فوري للشيك":
 		frappe.db.sql("""update `tabPayment Entry` set clearance_date = %s where name=%s """, (doc.cheque_action_date, doc.name))
