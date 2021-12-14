@@ -50,10 +50,7 @@ def cheque(doc, method=None):
 	if not doc.payable_account and doc.cheque_action == "صرف الشيك":
 		frappe.throw(_(" برجاء تحديد حساب برسم الدفع داخل الحساب البنكي وإعادة إختيار الحساب البنكي مرة أخرى "))
 
-<<<<<<< HEAD
 
-=======
->>>>>>> d0158d71032069e100f7ec3e8c2111a9607aa3ed
 	if doc.cheque_action == "تحويل إلى حافظة شيكات أخرى":
 		new_mode_of_payment_account = frappe.db.get_value('Mode of Payment Account', {'parent': doc.new_mode_of_payment}, 'default_account')
 		old_mode_of_payment_account = frappe.db.get_value("Mode of Payment Account", {'parent': doc.mode_of_payment}, 'default_account')
