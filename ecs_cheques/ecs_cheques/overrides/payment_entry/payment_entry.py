@@ -100,11 +100,7 @@ def cheque(doc, method=None):
 			doc.new_mode_of_payment = ""
 			frappe.db.commit()
 
-<<<<<<< HEAD
 
-
-=======
->>>>>>> d0158d71032069e100f7ec3e8c2111a9607aa3ed
 	if doc.cheque_action == "تحصيل فوري للشيك":
 		frappe.db.sql("""update `tabPayment Entry` set clearance_date = %s where name=%s """, (doc.cheque_action_date, doc.name))
 		frappe.db.sql(""" update `tabPayment Entry` set cheque_status = "محصل فوري" where name = %s""", doc.name)
