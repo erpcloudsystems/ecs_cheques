@@ -50,7 +50,6 @@ def cheque(doc, method=None):
 	if not doc.payable_account and doc.cheque_action == "صرف الشيك":
 		frappe.throw(_(" برجاء تحديد حساب برسم الدفع داخل الحساب البنكي وإعادة إختيار الحساب البنكي مرة أخرى "))
 
-
 	if doc.cheque_action == "تحويل إلى حافظة شيكات أخرى":
 		new_mode_of_payment_account = frappe.db.get_value('Mode of Payment Account', {'parent': doc.new_mode_of_payment}, 'default_account')
 		old_mode_of_payment_account = frappe.db.get_value("Mode of Payment Account", {'parent': doc.mode_of_payment}, 'default_account')
@@ -99,7 +98,6 @@ def cheque(doc, method=None):
 			doc.cheque_action_date = ""
 			doc.new_mode_of_payment = ""
 			frappe.db.commit()
-
 
 	if doc.cheque_action == "تحصيل فوري للشيك":
 		frappe.db.sql("""update `tabPayment Entry` set clearance_date = %s where name=%s """, (doc.cheque_action_date, doc.name))
