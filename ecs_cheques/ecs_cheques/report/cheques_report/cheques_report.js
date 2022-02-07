@@ -47,12 +47,20 @@ frappe.query_reports["Cheques Report"] = {
 
 		},
 		{
+			"fieldname":"new_mode_of_payment",
+			"label": __("Mode of Payment"),
+			"fieldtype": "Link",
+			"options": "Mode of Payment",
+		},
+		{
 			"fieldname":"bank",
 			"label": __("Bank"),
 			"fieldtype": "Link",
 			"options": "Bank Account"
 		}
 	],
+
+
 	    "formatter": function (value, row, column, data, default_formatter) {
                 value = default_formatter(value, row, column, data);
 
@@ -61,7 +69,8 @@ frappe.query_reports["Cheques Report"] = {
                 }else if(column.fieldname == "reference_date" && data && frappe.datetime.get_diff(data.reference_date, frappe.datetime.nowdate()) > 15){
                 }else if(column.fieldname == "reference_date" && data && frappe.datetime.get_diff(data.reference_date, frappe.datetime.nowdate()) > 15){
                     value =  value ;
-                }else if (column && data && data.cheque_status == "محصل فوري") {
+                }
+/*                else if (column && data && data.cheque_status == "محصل فوري") {
                      value = "<span style='background-color:#8CFA97;font-weight: bold;'>" + value + "</span>";
                 }else if (column && data && data.cheque_status == "محصل") {
                      value = "<span style='background-color:#8CFA97;font-weight: bold;'>" + value + "</span>";
@@ -82,6 +91,8 @@ frappe.query_reports["Cheques Report"] = {
                 }else if (column && data && data.cheque_status == "حافظة شيكات برسم الدفع") {
                      value = "<span style='background-color:#C8CDFE;font-weight: bold;'>" + value + "</span>";
                 }
+*/
                 return value;
             }
+
 }

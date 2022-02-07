@@ -26,6 +26,12 @@ def get_columns():
 			"width": 110
 		},
 		{
+			"label": _("Reference Date"),
+			"fieldname": "reference_date",
+			"fieldtype": "Date",
+			"width": 120
+		},
+		{
 			"label": _("Party Type"),
 			"fieldname": "party_type",
 			"fieldtype": "Data",
@@ -35,7 +41,44 @@ def get_columns():
 			"label": _("Party"),
 			"fieldname": "party",
 			"fieldtype": "Data",
-			"width": 100
+			"width": 150
+		},
+		{
+			"label": _("Drawn Bank"),
+			"fieldname": "drawn_bank",
+			"fieldtype": "Link",
+			"options": "Bank",
+			"width": 120
+		},
+		{
+			"label": _("Cheque Amount"),
+			"fieldname": "paid_amount",
+			"fieldtype": "Currency",
+			"width": 140
+		},
+		{
+			"label": _("Clearance Date"),
+			"fieldname": "clearance_date",
+			"fieldtype": "Date",
+			"width": 120
+		},
+		{
+			"label": _("Bank"),
+			"fieldname": "bank",
+			"fieldtype": "Data",
+			"width": 200
+		},
+		{
+			"label": _("Cheque Type"),
+			"fieldname": "cheque_type",
+			"fieldtype": "Data",
+			"width": 120
+		},
+		{
+			"label": _("Mode of Payment"),
+			"fieldname": "mode_of_payment",
+			"fieldtype": "Data",
+			"width": 150
 		},
 		{
 			"label": _("Status"),
@@ -49,24 +92,8 @@ def get_columns():
 			"fieldtype": "Date",
 			"width": 120
 		},
-		{
-			"label": _("Reference Date"),
-			"fieldname": "reference_date",
-			"fieldtype": "Date",
-			"width": 120
-		},
-		{
-			"label": _("Clearance Date"),
-			"fieldname": "clearance_date",
-			"fieldtype": "Date",
-			"width": 120
-		},
-		{
-			"label": _("Cheque Amount"),
-			"fieldname": "paid_amount",
-			"fieldtype": "Currency",
-			"width": 140
-		},
+
+
 		{
 			"label": _("Encashed Amount"),
 			"fieldname": "encashed_amount",
@@ -79,31 +106,14 @@ def get_columns():
 			"fieldtype": "Currency",
 			"width": 150
 		},
-		{
-			"label": _("Bank"),
-			"fieldname": "bank",
-			"fieldtype": "Data",
-			"width": 200
-		},
+
 		{
 			"label": _("Forwarded"),
 			"fieldname": "party_",
 			"fieldtype": "Data",
 			"width": 120
 		},
-		{
-			"label": _("Drawn Bank"),
-			"fieldname": "drawn_bank",
-			"fieldtype": "Link",
-			"options": "Bank",
-			"width": 120
-		},
-		{
-			"label": _("Cheque Type"),
-			"fieldname": "cheque_type",
-			"fieldtype": "Data",
-			"width": 120
-		},
+
 		{
 			"label": _("First Beneficiary"),
 			"fieldname": "first_beneficiary",
@@ -138,8 +148,8 @@ def get_item_price_qty_data(filters):
 		conditions += " and a.reference_date<=%(to_date)s"
 	if filters.get("bank"):
 		conditions += " and a.bank_acc=%(bank)s"
-	if filters.get("mode_of_payment"):
-		conditions += " and a.mode_of_payment=%(mode_of_payment)s"
+	if filters.get("new_mode_of_payment"):
+		conditions += " and a.new_mode_of_payment=%(new_mode_of_payment)s"
 	if filters.get("type") == "Receive":
 		item_results = frappe.db.sql("""
 					select
@@ -148,8 +158,9 @@ def get_item_price_qty_data(filters):
 						a.party_type as party_type,
 						a.party as party,
 						a.cheque_status as cheque_status,
+						a.mode_of_payment as mode_of_payment,
 						a.posting_date as posting_date,
-						a.reference_date as reference_date,
+						if (a.change_date, a.cheque_new_date, a.reference_date) as reference_date,
 						a.clearance_date as clearance_date,
 						a.paid_amount as paid_amount,
 						a.encashed_amount as encashed_amount,
@@ -166,6 +177,7 @@ def get_item_price_qty_data(filters):
 						and docstatus =1
 						{conditions}
 				{conditions}
+                        ORDER BY reference_date ASC;						
 			"""
 			.format(conditions=conditions), filters, as_dict=1)
 	elif filters.get("type") == "Pay":
@@ -176,6 +188,7 @@ def get_item_price_qty_data(filters):
 						a.party_type as party_type,
 						a.party as party,
 						a.cheque_status_pay as cheque_status,
+						a.mode_of_payment as mode_of_payment,
 						a.posting_date as posting_date,
 						a.reference_date as reference_date,
 						a.clearance_date as clearance_date,
@@ -191,6 +204,8 @@ def get_item_price_qty_data(filters):
 						a.mode_of_payment_type = 'Cheque'
 						and docstatus =1
 						{conditions}
+                        ORDER BY reference_date ASC;
+						
 					"""
 									 .format(conditions=conditions), filters, as_dict=1)
 
@@ -200,6 +215,7 @@ def get_item_price_qty_data(filters):
 						a.name as payment_entry,
 						a.reference_no as reference_no,
 						a.posting_date as posting_date,
+						a.mode_of_payment as mode_of_payment,
 						a.reference_date as reference_date,
 						a.clearance_date as clearance_date,
 						a.paid_amount as paid_amount,
@@ -211,6 +227,7 @@ def get_item_price_qty_data(filters):
 						a.mode_of_payment_type = 'Cheque'
 						and docstatus =1
 						{conditions}
+                        ORDER BY reference_date ASC;						
 					"""
 									 .format(conditions=conditions), filters, as_dict=1)
 
@@ -227,6 +244,7 @@ def get_item_price_qty_data(filters):
 				'reference_no': item_dict.reference_no,
 				'party_type': item_dict.party_type,
 				'party': item_dict.party,
+				'mode_of_payment': item_dict.mode_of_payment,
 				'cheque_status': item_dict.cheque_status,
 				'posting_date': item_dict.posting_date,
 				'reference_date': item_dict.reference_date,
