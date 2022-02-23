@@ -81,6 +81,12 @@ def get_columns():
 			"width": 150
 		},
 		{
+			"label": _("New Mode of Payment"),
+			"fieldname": "new_mode_of_payment",
+			"fieldtype": "Data",
+			"width": 150
+		},
+		{
 			"label": _("Status"),
 			"fieldname": "cheque_status",
 			"fieldtype": "Data",
@@ -159,6 +165,7 @@ def get_item_price_qty_data(filters):
 						a.party as party,
 						a.cheque_status as cheque_status,
 						a.mode_of_payment as mode_of_payment,
+						a.new_mode_of_payment as new_mode_of_payment,
 						a.posting_date as posting_date,
 						if (a.change_date, a.cheque_new_date, a.reference_date) as reference_date,
 						a.clearance_date as clearance_date,
@@ -189,6 +196,7 @@ def get_item_price_qty_data(filters):
 						a.party as party,
 						a.cheque_status_pay as cheque_status,
 						a.mode_of_payment as mode_of_payment,
+						a.new_mode_of_payment as new_mode_of_payment,
 						a.posting_date as posting_date,
 						a.reference_date as reference_date,
 						a.clearance_date as clearance_date,
@@ -216,6 +224,7 @@ def get_item_price_qty_data(filters):
 						a.reference_no as reference_no,
 						a.posting_date as posting_date,
 						a.mode_of_payment as mode_of_payment,
+						a.new_mode_of_payment as new_mode_of_payment,
 						a.reference_date as reference_date,
 						a.clearance_date as clearance_date,
 						a.paid_amount as paid_amount,
@@ -245,6 +254,7 @@ def get_item_price_qty_data(filters):
 				'party_type': item_dict.party_type,
 				'party': item_dict.party,
 				'mode_of_payment': item_dict.mode_of_payment,
+				'new_mode_of_payment': item_dict.new_mode_of_payment,
 				'cheque_status': item_dict.cheque_status,
 				'posting_date': item_dict.posting_date,
 				'reference_date': item_dict.reference_date,
