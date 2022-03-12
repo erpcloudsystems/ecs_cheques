@@ -38,11 +38,7 @@
  "idx": 0,
  "is_default": 0,
  "is_standard": 1,
-<<<<<<< HEAD
- "modified": "2021-11-20 16:51:58.230520",
-=======
  "modified": "2021-12-13 21:32:30.913836",
->>>>>>> cdd74b336ac546a4b62b10c26e7521d153360cf8
  "modified_by": "Administrator",
  "module": "ECS Cheques",
  "name": "Cheques Dashborad",
