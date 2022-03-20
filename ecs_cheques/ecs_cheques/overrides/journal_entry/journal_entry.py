@@ -22,6 +22,14 @@ def update_payment_entry_on_cancel(doc, method=None):
 		frappe.db.sql(""" update `tabPayment Entry` set cheque_status = "مرفوض بالبنك" where name = %s""", doc.reference_link)
 		frappe.db.sql(""" update `tabPayment Entry` set cheque_action = "" where name = %s""", doc.reference_link)
 
+	if doc.reference_doctype == "Payment Entry" and doc.pe_status == "مردود 1":
+		frappe.db.sql(""" update `tabPayment Entry` set cheque_status = "حافظة شيكات واردة" where name = %s""", doc.reference_link)
+		frappe.db.sql(""" update `tabPayment Entry` set cheque_action = "" where name = %s""", doc.reference_link)
+
+	if doc.reference_doctype == "Payment Entry" and doc.pe_status == "مردود 2":
+		frappe.db.sql(""" update `tabPayment Entry` set cheque_status = "مرفوض بالبنك" where name = %s""", doc.reference_link)
+		frappe.db.sql(""" update `tabPayment Entry` set cheque_action = "" where name = %s""", doc.reference_link)
+
 	if doc.reference_doctype == "Payment Entry" and doc.reference_link and (doc.pe_status == "محصل" or doc.pe_status == "مرفوض بالبنك"):
 		frappe.db.sql(""" update `tabPayment Entry` set cheque_status = "تحت التحصيل" where name = %s""", doc.reference_link)
 		frappe.db.sql(""" update `tabPayment Entry` set cheque_action = "" where name = %s""", doc.reference_link)
@@ -31,7 +39,7 @@ def update_payment_entry_on_cancel(doc, method=None):
 		frappe.db.sql(""" update `tabPayment Entry` set cheque_status = "مرفوض بالبنك" where name = %s""", doc.reference_link)
 		frappe.db.sql(""" update `tabPayment Entry` set cheque_action = "" where name = %s""", doc.reference_link)
 
-	if doc.reference_doctype == "Payment Entry" and doc.reference_link and doc.pe_status == "مدفوع":
+	if doc.reference_doctype == "Payment Entry" and doc.reference_link and (doc.pe_status == "مدفوع" or doc.pe_status == "مسحوب"):
 		frappe.db.sql(""" update `tabPayment Entry` set cheque_status_pay = "حافظة شيكات برسم الدفع" where name = %s""", doc.reference_link)
 		frappe.db.sql(""" update `tabPayment Entry` set cheque_action = "" where name = %s""", doc.reference_link)
 		frappe.db.sql(""" update `tabPayment Entry` set clearance_date = NULL where name = %s""", doc.reference_link)

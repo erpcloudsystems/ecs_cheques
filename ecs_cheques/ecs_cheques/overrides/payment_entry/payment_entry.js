@@ -28,9 +28,9 @@ frappe.ui.form.on("Payment Entry", {
                 set_field_options("cheque_action", ["رد شيك"]);
         }
         if (cur_frm.doc.docstatus == "1" && cur_frm.doc.mode_of_payment_type == "Cheque" && cur_frm.doc.payment_type == "Pay" && cur_frm.doc.party_type == "Supplier" && cur_frm.doc.cheque_status_pay == "حافظة شيكات برسم الدفع"){
-            set_field_options("cheque_action", ["صرف الشيك"]);
+            set_field_options("cheque_action", ["صرف الشيك","سحب الشيك"]);
         }
-        if (cur_frm.doc.docstatus == "1" && cur_frm.doc.mode_of_payment_type == "Cheque" && (cur_frm.doc.cheque_status == "مظهر" || cur_frm.doc.cheque_status == "محصل فوري" || cur_frm.doc.cheque_status == "مردود" || cur_frm.doc.cheque_status == "محصل" || cur_frm.doc.cheque_status_pay == "مدفوع")){
+        if (cur_frm.doc.docstatus == "1" && cur_frm.doc.mode_of_payment_type == "Cheque" && (cur_frm.doc.cheque_status == "مظهر" || cur_frm.doc.cheque_status == "محصل فوري" || cur_frm.doc.cheque_status == "مردود" || cur_frm.doc.cheque_status == "محصل" || cur_frm.doc.cheque_status_pay == "مدفوع" || cur_frm.doc.cheque_status_pay == "مسحوب")){
             set_field_options("cheque_action", [" "]);
         }
     }
