@@ -58,15 +58,33 @@
   },
   {
    "hidden": 0,
-   "is_query_report": 1,
+   "is_query_report": 0,
    "label": "Cheques Report",
    "link_to": "Cheques Report",
    "link_type": "Report",
    "onboard": 0,
    "type": "Link"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "General Ledger",
+   "link_to": "General Ledger",
+   "link_type": "Report",
+   "onboard": 0,
+   "type": "Link"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 1,
+   "label": "Cheque Report 1",
+   "link_to": "Cheque Report 1",
+   "link_type": "Report",
+   "onboard": 0,
+   "type": "Link"
   }
  ],
- "modified": "2021-11-20 16:21:12.628803",
+ "modified": "2022-03-08 16:32:18.716620",
  "modified_by": "Administrator",
  "module": "ECS Cheques",
  "name": "Cheques",

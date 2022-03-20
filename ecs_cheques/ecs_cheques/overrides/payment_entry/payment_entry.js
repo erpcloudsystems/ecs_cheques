@@ -91,11 +91,13 @@ frappe.ui.form.on("Payment Entry","cheque_bank", function(frm){
     cur_frm.set_value("payable_account","");
 });
 
+/*
 frappe.ui.form.on("Payment Entry","bank_acc", function(frm){
     cur_frm.set_value("account","");
     cur_frm.set_value("collection_fee_account","");
     cur_frm.set_value("payable_account","");
 });
+*/
 
 frappe.ui.form.on("Payment Entry","bank_acc", function(frm){
     if(cur_frm.doc.payment_type == "Pay" && cur_frm.doc.mode_of_payment_type == "Cheque"){
