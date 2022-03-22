@@ -31,7 +31,7 @@ frappe.query_reports["Cheques Report"] = {
 			"fieldname":"status_pay",
 			"label": __("Status"),
 			"fieldtype": "Select",
-			"options":  "\nحافظة شيكات برسم الدفع\nمدفوع",
+			"options":  "\nحافظة شيكات برسم الدفع\nمدفوع\nمسحوب",
 			
 		},
 		{
