@@ -16,6 +16,41 @@
   {
    "hidden": 0,
    "is_query_report": 0,
+   "label": "Setup",
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Card Break"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Banks",
+   "link_to": "Bank",
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Link"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Bank Accounts",
+   "link_to": "Bank Account",
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Link"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Modes of Payment",
+   "link_to": "Mode of Payment",
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Link"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
    "label": "Transactions",
    "link_type": "DocType",
    "onboard": 0,
@@ -75,7 +110,11 @@
    "type": "Link"
   }
  ],
+<<<<<<< HEAD
  "modified": "2022-03-20 14:44:35.639387",
+=======
+ "modified": "2022-03-22 11:11:40.037676",
+>>>>>>> 05ee7773770e48b6547a3fd89d4afc89895401bc
  "modified_by": "Administrator",
  "module": "ECS Cheques",
  "name": "Cheques",
