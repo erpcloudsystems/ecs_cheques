@@ -75,10 +75,11 @@
    "type": "Link"
   }
  ],
- "modified": "2022-03-20 13:31:56.177348",
+ "modified": "2022-03-20 14:44:35.639387",
  "modified_by": "Administrator",
  "module": "ECS Cheques",
  "name": "Cheques",
+ "onboarding": "Cheques",
  "owner": "Administrator",
  "pin_to_bottom": 0,
  "pin_to_top": 0,

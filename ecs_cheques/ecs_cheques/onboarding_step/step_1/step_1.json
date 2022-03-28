@@ -1,0 +1,19 @@
+{
+ "action": "Watch Video",
+ "creation": "2022-03-20 14:44:06.552215",
+ "docstatus": 0,
+ "doctype": "Onboarding Step",
+ "idx": 0,
+ "is_complete": 0,
+ "is_single": 0,
+ "is_skipped": 0,
+ "modified": "2022-03-20 14:51:47.247838",
+ "modified_by": "Administrator",
+ "name": "Step 1",
+ "owner": "Administrator",
+ "show_form_tour": 0,
+ "show_full_form": 0,
+ "title": "Watch Video",
+ "validate_action": 1,
+ "video_url": "https://www.youtube.com/watch?v=nwDyf3-jYLM"
+}

@@ -1,0 +1,26 @@
+{
+ "allow_roles": [
+  {
+   "role": "All"
+  }
+ ],
+ "creation": "2022-03-20 14:44:09.972302",
+ "docstatus": 0,
+ "doctype": "Module Onboarding",
+ "documentation_url": "https://www.youtube.com/watch?v=nwDyf3-jYLM",
+ "idx": 0,
+ "is_complete": 0,
+ "modified": "2022-03-20 14:52:07.594433",
+ "modified_by": "Administrator",
+ "module": "ECS Cheques",
+ "name": "Cheques",
+ "owner": "Administrator",
+ "steps": [
+  {
+   "step": "Step 1"
+  }
+ ],
+ "subtitle": "Cheques",
+ "success_message": "OK",
+ "title": "Cheques"
+}
