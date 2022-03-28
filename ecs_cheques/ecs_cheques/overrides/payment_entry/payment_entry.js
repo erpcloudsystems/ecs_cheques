@@ -99,12 +99,12 @@ frappe.ui.form.on("Payment Entry","bank_acc", function(frm){
 });
 */
 
-frappe.ui.form.on("Payment Entry","bank_acc", function(frm){
+/*frappe.ui.form.on("Payment Entry","bank_acc", function(frm){
     if(cur_frm.doc.payment_type == "Pay" && cur_frm.doc.mode_of_payment_type == "Cheque"){
         cur_frm.set_value("paid_from",cur_frm.doc.collection_fee_account);
     }
 });
-
+*/
 frappe.ui.form.on("Payment Entry","first_beneficiary", function(frm){
     if(cur_frm.doc.payment_type == "Pay" && cur_frm.doc.first_beneficiary == "Company" && cur_frm.doc.mode_of_payment_type == "Cheque"){
         cur_frm.set_value("person_name",cur_frm.doc.party);
