@@ -681,7 +681,7 @@ def cheque(doc, method=None):
 	if not doc.bank_acc and doc.cheque_action in ("سحب الشيك", "صرف الشيك"):
 		frappe.throw(_("برجاء تحديد الحساب البنكي"))
 
-	if doc.cheque_action == "صرف الشيك" and doc.payment_type == "Pay":
+	if doc.cheque_action == "صرف الشيك" and doc.payment_type in ("Pay", "Internal Transfer"):
 		frappe.db.sql("""update `tabPayment Entry` set clearance_date = %s where name=%s """, (doc.cheque_action_date, doc.name))
 		frappe.db.sql(""" update `tabPayment Entry` set cheque_status_pay = "مدفوع" where name = %s""", doc.name)
 		frappe.db.sql(""" update `tabPayment Entry` set cheque_action = "" where name = %s""", doc.name)
