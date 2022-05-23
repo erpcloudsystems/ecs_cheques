@@ -81,6 +81,7 @@ def cheque(doc, method=None):
 			]
 			new_doc = frappe.get_doc({
 				"doctype": "Journal Entry",
+				"company": doc.company,
 				"voucher_type": "Bank Entry",
 				"reference_doctype": "Payment Entry",
 				"reference_link": doc.name,
@@ -124,6 +125,7 @@ def cheque(doc, method=None):
 		]
 		new_doc = frappe.get_doc({
 			"doctype": "Journal Entry",
+			"company": doc.company,
 			"voucher_type": "Bank Entry",
 			"reference_doctype": "Payment Entry",
 			"reference_link": doc.name,
@@ -180,6 +182,7 @@ def cheque(doc, method=None):
 		]
 		new_doc = frappe.get_doc({
 			"doctype": "Journal Entry",
+			"company": doc.company,
 			"voucher_type": "Bank Entry",
 			"reference_doctype": "Payment Entry",
 			"reference_link": doc.name,
@@ -219,6 +222,7 @@ def cheque(doc, method=None):
 		]
 		new_doc = frappe.get_doc({
 			"doctype": "Journal Entry",
+			"company": doc.company,
 			"voucher_type": "Bank Entry",
 			"reference_doctype": "Payment Entry",
 			"reference_link": doc.name,
@@ -258,6 +262,7 @@ def cheque(doc, method=None):
 		]
 		new_doc = frappe.get_doc({
 			"doctype": "Journal Entry",
+			"company": doc.company,
 			"voucher_type": "Bank Entry",
 			"reference_doctype": "Payment Entry",
 			"reference_link": doc.name,
@@ -298,6 +303,7 @@ def cheque(doc, method=None):
 		]
 		new_doc = frappe.get_doc({
 			"doctype": "Journal Entry",
+			"company": doc.company,
 			"voucher_type": "Bank Entry",
 			"reference_doctype": "Payment Entry",
 			"reference_link": doc.name,
@@ -339,12 +345,13 @@ def cheque(doc, method=None):
 		]
 		new_doc = frappe.get_doc({
 			"doctype": "Journal Entry",
+			"company": doc.company,
 			"voucher_type": "Bank Entry",
 			"reference_doctype": "Payment Entry",
 			"reference_link": doc.name,
 			"cheque_no": doc.reference_no,
 			"cheque_date": doc.reference_date,
-			"pe_status": "مردود",
+			"pe_status": "مردود2",
 			"posting_date": doc.cheque_action_date,
 			"accounts": accounts,
 			"payment_type": doc.payment_type,
@@ -394,6 +401,7 @@ def cheque(doc, method=None):
 		]
 		new_doc = frappe.get_doc({
 			"doctype": "Journal Entry",
+			"company": doc.company,
 			"voucher_type": "Bank Entry",
 			"reference_doctype": "Payment Entry",
 			"reference_link": doc.name,
@@ -434,6 +442,7 @@ def cheque(doc, method=None):
 		]
 		new_doc = frappe.get_doc({
 			"doctype": "Journal Entry",
+			"company": doc.company,
 			"voucher_type": "Bank Entry",
 			"reference_doctype": "Payment Entry",
 			"reference_link": doc.name,
@@ -490,6 +499,7 @@ def cheque(doc, method=None):
 		]
 		new_doc = frappe.get_doc({
 			"doctype": "Journal Entry",
+			"company": doc.company,
 			"voucher_type": "Bank Entry",
 			"reference_doctype": "Payment Entry",
 			"reference_link": doc.name,
@@ -530,6 +540,7 @@ def cheque(doc, method=None):
 		]
 		new_doc = frappe.get_doc({
 			"doctype": "Journal Entry",
+			"company": doc.company,
 			"voucher_type": "Bank Entry",
 			"reference_doctype": "Payment Entry",
 			"reference_link": doc.name,
@@ -571,6 +582,7 @@ def cheque(doc, method=None):
 		]
 		new_doc = frappe.get_doc({
 			"doctype": "Journal Entry",
+			"company": doc.company,
 			"voucher_type": "Bank Entry",
 			"reference_doctype": "Payment Entry",
 			"reference_link": doc.name,
@@ -622,6 +634,7 @@ def cheque(doc, method=None):
 		]
 		new_doc = frappe.get_doc({
 			"doctype": "Journal Entry",
+			"company": doc.company,
 			"voucher_type": "Bank Entry",
 			"reference_doctype": "Payment Entry",
 			"reference_link": doc.name,
@@ -666,12 +679,13 @@ def cheque(doc, method=None):
 		]
 		new_doc = frappe.get_doc({
 			"doctype": "Journal Entry",
+			"company": doc.company,
 			"voucher_type": "Bank Entry",
 			"reference_doctype": "Payment Entry",
 			"reference_link": doc.name,
 			"cheque_no": doc.reference_no,
 			"cheque_date": doc.reference_date,
-			"pe_status": "مردود",
+			"pe_status": "مردود1",
 			"posting_date": doc.cheque_action_date,
 			"accounts": accounts,
 			"payment_type": doc.payment_type,
@@ -682,45 +696,7 @@ def cheque(doc, method=None):
 		frappe.db.sql(""" update `tabPayment Entry` set cheque_action_date = NULL where name = %s""", doc.name)
 		doc.reload()
 
-		'''
-		accounts = [
-			{
-				"doctype": "Journal Entry Account",
-				"account": default_receivable_account,
-				"party": doc.party,
-				"party_type": doc.party_type,
-				"credit": 0,
-				"debit": doc.paid_amount,
-				"debit_in_account_currency": doc.paid_amount,
-				"user_remark": doc.name
-			},
-			{
-				"doctype": "Journal Entry Account",
-				"account": default_payback_cheque_wallet_account,
-				"debit": 0,
-				"credit": doc.paid_amount,
-				"credit_in_account_currency": doc.paid_amount,
-				"user_remark": doc.name
-			}
-		]
-		new_doc = frappe.get_doc({
-			"doctype": "Journal Entry",
-			"voucher_type": "Bank Entry",
-			"reference_doctype": "Payment Entry",
-			"reference_link": doc.name,
-			"cheque_no": doc.reference_no,
-			"cheque_date": doc.reference_date,
-			"pe_status": "مردود",
-			"posting_date": doc.cheque_action_date,
-			"accounts": accounts,
-			"payment_type": doc.payment_type,
-			"user_remark": doc.party_name
-		})
-		new_doc.insert()
-		new_doc.submit()
-		frappe.db.sql(""" update `tabPayment Entry` set cheque_action_date = NULL where name = %s""", doc.name)
-		doc.reload()
-'''
+
 	if not doc.bank_acc and doc.cheque_action == "صرف الشيك":
 		frappe.throw(_("برجاء تحديد الحساب البنكي"))
 
@@ -748,12 +724,58 @@ def cheque(doc, method=None):
 		]
 		new_doc = frappe.get_doc({
 			"doctype": "Journal Entry",
+			"company": doc.company,
 			"voucher_type": "Bank Entry",
 			"reference_doctype": "Payment Entry",
 			"reference_link": doc.name,
 			"cheque_no": doc.reference_no,
 			"cheque_date": doc.reference_date,
 			"pe_status": "مدفوع",
+			"posting_date": doc.cheque_action_date,
+			"accounts": accounts,
+			"payment_type": doc.payment_type,
+			"user_remark": doc.party_name
+		})
+		new_doc.insert()
+		new_doc.submit()
+		frappe.db.sql(""" update `tabPayment Entry` set cheque_action_date = NULL where name = %s""", doc.name)
+		doc.reload()
+
+	if not doc.bank_acc and doc.cheque_action in ("سحب الشيك", "صرف الشيك"):
+		frappe.throw(_("برجاء تحديد الحساب البنكي"))
+	
+	if doc.cheque_action == "سحب الشيك":
+		frappe.db.sql(""" update `tabPayment Entry` set cheque_status_pay = "مسحوب" where name = %s""", doc.name)
+		frappe.db.sql(""" update `tabPayment Entry` set cheque_action = "" where name = %s""", doc.name)
+		accounts = [
+			{
+				"doctype": "Journal Entry Account",
+				"account": doc.payable_account,
+				"credit": 0,
+				"debit": doc.paid_amount,
+				"debit_in_account_currency": doc.paid_amount,
+				"user_remark": doc.name
+			},
+			{
+				"doctype": "Journal Entry Account",
+				"account": doc.paid_to,
+				"party": doc.party,
+				"party_type": doc.party_type,
+				"debit": 0,
+				"credit": doc.paid_amount,
+				"credit_in_account_currency": doc.paid_amount,
+				"user_remark": doc.name
+			}
+		]
+		new_doc = frappe.get_doc({
+			"doctype": "Journal Entry",
+			"company": doc.company,
+			"voucher_type": "Bank Entry",
+			"reference_doctype": "Payment Entry",
+			"reference_link": doc.name,
+			"cheque_no": doc.reference_no,
+			"cheque_date": doc.reference_date,
+			"pe_status": "مسحوب",
 			"posting_date": doc.cheque_action_date,
 			"accounts": accounts,
 			"payment_type": doc.payment_type,
