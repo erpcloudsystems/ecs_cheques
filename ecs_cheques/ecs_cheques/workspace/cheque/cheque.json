@@ -1,7 +1,7 @@
 {
  "category": "Modules",
  "charts": [],
- "creation": "2021-08-14 19:51:38.716240",
+ "creation": "2022-05-23 14:36:46.622334",
  "developer_mode_only": 0,
  "disable_user_customization": 0,
  "docstatus": 0,
@@ -11,7 +11,7 @@
  "idx": 0,
  "is_default": 0,
  "is_standard": 1,
- "label": "Cheques",
+ "label": "Cheque",
  "links": [
   {
    "hidden": 0,
@@ -110,10 +110,10 @@
    "type": "Link"
   }
  ],
- "modified": "2022-05-23 14:33:56.344070",
+ "modified": "2022-05-23 14:36:46.622334",
  "modified_by": "Administrator",
  "module": "ECS Cheques",
- "name": "Cheques",
+ "name": "Cheque",
  "onboarding": "",
  "owner": "Administrator",
  "pin_to_bottom": 0,

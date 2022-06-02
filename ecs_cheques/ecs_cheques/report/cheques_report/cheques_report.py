@@ -20,6 +20,18 @@ def get_columns():
 			"width": 140
 		},
 		{
+			"label": _("Posting Date"),
+			"fieldname": "posting_date",
+			"fieldtype": "Date",
+			"width": 120
+		},
+		{
+			"label": _("Cheque Amount"),
+			"fieldname": "paid_amount",
+			"fieldtype": "Currency",
+			"width": 140
+		},
+		{
 			"label": _("Cheque No"),
 			"fieldname": "reference_no",
 			"fieldtype": "Data",
@@ -44,18 +56,25 @@ def get_columns():
 			"width": 150
 		},
 		{
+			"label": _("Party Name"),
+			"fieldname": "party_name",
+			"fieldtype": "Data",
+			"width": 150
+		},
+		{
+			"label": _("Status"),
+			"fieldname": "cheque_status",
+			"fieldtype": "Data",
+			"width": 150
+		},
+		{
 			"label": _("Drawn Bank"),
 			"fieldname": "drawn_bank",
 			"fieldtype": "Link",
 			"options": "Bank",
 			"width": 120
 		},
-		{
-			"label": _("Cheque Amount"),
-			"fieldname": "paid_amount",
-			"fieldtype": "Currency",
-			"width": 140
-		},
+
 		{
 			"label": _("Clearance Date"),
 			"fieldname": "clearance_date",
@@ -69,36 +88,24 @@ def get_columns():
 			"width": 200
 		},
 		{
-			"label": _("Cheque Type"),
-			"fieldname": "cheque_type",
-			"fieldtype": "Data",
-			"width": 120
-		},
-		{
 			"label": _("Mode of Payment"),
 			"fieldname": "mode_of_payment",
 			"fieldtype": "Data",
 			"width": 150
 		},
 		{
+			"label": _("Cheque Type"),
+			"fieldname": "cheque_type",
+			"fieldtype": "Data",
+			"width": 120
+		},
+
+		{
 			"label": _("New Mode of Payment"),
 			"fieldname": "new_mode_of_payment",
 			"fieldtype": "Data",
 			"width": 150
 		},
-		{
-			"label": _("Status"),
-			"fieldname": "cheque_status",
-			"fieldtype": "Data",
-			"width": 150
-		},
-		{
-			"label": _("Posting Date"),
-			"fieldname": "posting_date",
-			"fieldtype": "Date",
-			"width": 120
-		},
-
 
 		{
 			"label": _("Encashed Amount"),
@@ -163,6 +170,7 @@ def get_item_price_qty_data(filters):
 						a.reference_no as reference_no,
 						a.party_type as party_type,
 						a.party as party,
+						a.party_name as party_name,
 						a.cheque_status as cheque_status,
 						a.mode_of_payment as mode_of_payment,
 						a.new_mode_of_payment as new_mode_of_payment,
@@ -253,6 +261,7 @@ def get_item_price_qty_data(filters):
 				'reference_no': item_dict.reference_no,
 				'party_type': item_dict.party_type,
 				'party': item_dict.party,
+				'party_name': item_dict.party_name,
 				'mode_of_payment': item_dict.mode_of_payment,
 				'new_mode_of_payment': item_dict.new_mode_of_payment,
 				'cheque_status': item_dict.cheque_status,
